@@ -1,0 +1,268 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    height: 100%;
+}
+
+body{
+    background-image: url("images/back.jpg");
+    background-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.phone{
+    position: relative;
+    width: 20%;
+    aspect-ratio: 1/2;
+    background-color:  #ffffff;
+    border-radius: 50px;
+    border: 3px solid goldenrod;
+    justify-content: center;
+    align-items: center;
+}
+
+.speaker-video-elements{
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 12.5%;
+}
+
+.screen{
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 75%;
+    background-image: url("images/wallpaper.jpg");
+    background-size: cover;
+}
+
+.bottom-of-screen{
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 12.5%;
+}
+
+.round-button{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10%;
+    height: 70%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 3px solid goldenrod
+}
+
+.top-camera-area{
+    position: relative;
+    width: 100%;
+    height: 50%;
+}
+
+.top-camera{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40%;
+    width: 2%;
+    aspect-ratio: 1/1;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.bottom-camera-area{
+    position: relative;
+    width: 100%;
+    height: 50%;
+}
+
+.bottom-camera{
+    position: relative;
+    display: inline-block;
+    left: 30%;
+    width: 4%;
+    aspect-ratio: 1/1;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.speaker{
+    position: absolute;
+    display: inline-block;
+    left: 50%;
+    top: 13%;
+    transform: translateX(-50%);
+    height: 8%;
+    width: 13%;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.mute-button{
+    position: absolute;
+    width: 3px;
+    height:30px;
+    background-color: goldenrod;
+    left: -5px;
+    top: 100px;
+}
+
+.volume-up-button{
+    position: absolute;
+    width: 3px;
+    height:50px;
+    background-color: goldenrod;
+    left: -5px;
+    top: 160px;
+}
+
+.volume-down-button{
+    position: absolute;
+    width: 3px;
+    height:50px;
+    background-color: goldenrod;
+    left: -5px;
+    top: 225px;
+}
+
+.on-off-button{
+    position: absolute;
+    width: 5px;
+    height:50px;
+    background-color: goldenrod;
+    left: 100%;
+    top: 160px;
+}
+
+.screen-items{
+    width: 100%;
+    height: 100%;
+}
+
+.screen-top{
+    display: grid;
+    grid-template-columns: 10% 14% 10% 56% 10%;
+    width: 100%;
+    height: 3%;
+}
+
+.dots{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    margin-left: 10%;
+    margin-top: 7%;
+    width:100%;
+    height: 100%;
+}
+
+.dot{
+    position: relative;
+    margin-top: 80%;
+    height: 20%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.mobile-operator{
+    color: white;
+    margin-top: 6%;
+    margin-left: 10%;
+    font-size: 12px;
+}
+
+.wifi-icon{
+    width: 14px;
+    margin-left: 10%;
+    margin-top: 6%;
+    aspect-ratio: 1/1;
+}
+
+.top-scroller{
+    position: relative;
+    width: 10%;
+    height: 20%;
+    border-radius: 30px;
+    top: 80%;
+    margin-left: 23%;
+    background-color: white;
+}
+
+.battery-icon{
+    width: 20px;
+    margin-left: 10%;
+    margin-top: 6%;
+    aspect-ratio: 1/1;
+}
+
+.screen-clock{
+    position: relative;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    width: fit-content;
+    font-size: 400%;
+    font-weight: 100;
+    margin-top: 15%;
+}
+
+
+.screen-date{
+    position: relative;
+    margin-left: 50%;
+    color: white;
+    transform: translateX(-50%);
+    width:max-content;
+    font-weight: 100;
+}
+
+.screen-slider{
+    position: relative;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 85%;
+}
+
+.slider-png{
+    width:20%;
+    aspect-ratio: 1/1;
+}
+
+.slider-text{
+    position: relative;
+    top: -10px;
+    display: inline;
+    color: white;
+}
+
+.bottom-scroller{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10%;
+    width: 7%;
+    aspect-ratio: 15/4;
+    border-radius: 30px;
+    background-color: white;
+}
+
+.screen-camera{
+    width: 7%;
+    aspect-ratio: 1/1;
+    position: relative;
+    left: 90%;
+    top: -2%
+}
