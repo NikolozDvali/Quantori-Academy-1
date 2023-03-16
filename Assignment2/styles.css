@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0; 
+    height: 100%; 
+    overflow: hidden;
+    background-color: black;
+}
+
+
+.area{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.wrapper{
+    position: absolute;
+    width: 20%;
+    animation: y 3s linear infinite alternate;
+}  
+
+.logo{
+    width: 100%;
+    animation: x 7s linear infinite alternate; 
+    transition: 10ms linear b
+}
+
+@keyframes x{
+    100% {
+        transform: translateX( calc(100vw - 20vw) );
+      }
+}
+
+@keyframes y{
+    100% {
+        transform: translateY( calc(100vh - 12vh) );
+      }
+}
+

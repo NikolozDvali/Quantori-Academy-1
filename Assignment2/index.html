@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVD_Display</title>
+    <link rel="stylesheet" href="styles.css"></head>
+    <script>
+		const bgColors = ['red', 'blue', 'green', 'orange'];
+		let colorIndex = 0;
+		setInterval(() => {
+			const logo = document.querySelector('.logo');
+			logo.style.backgroundColor = bgColors[colorIndex];
+			colorIndex = (colorIndex + 1) % bgColors.length;
+            document.getElementById("audio").play();
+		}, 3000);
+        setInterval(() => {
+			const logo = document.querySelector('.logo');
+			logo.style.backgroundColor = bgColors[colorIndex];
+			colorIndex = (colorIndex + 1) % bgColors.length;
+            document.getElementById("audio").play();
+
+		}, 7000);
+	</script>
+<body>
+    <div class="area">
+        <audio src="https://quantoriacademy.matrixlms.com/files/4029099/ES_PREL_Laser_3_-_SFX_Producer.mp3?lmsauth=2d69c3058e5d9a5dc039ad5dff4ec260f2d622f8" autoplay id="audio"></audio>
+
+        <div class="wrapper">
+            <img src="images\logo.png" class="logo">
+        </div>
+    </div>
+</body>
+</html>
+
