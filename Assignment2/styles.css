@@ -26,14 +26,82 @@ html, body {
 
 .logo{
     width: 100%;
-    animation: x 7s linear infinite alternate; 
-    transition: 10ms linear b
+    animation: x 7s linear infinite alternate, color1 21s infinite forwards ; 
+    background-color: white;
 }
+
+@keyframes color1{
+   14.284%{
+    background-color:white;
+   }
+   14.285%{
+    background-color: gold;;
+   }
+
+   28.570%{
+    background-color: gold;
+   }
+   28.571%{
+    background-color: chartreuse;
+   }
+
+   33.332%{
+    background-color: chartreuse;
+   }
+   33.333%{
+    background-color:crimson;
+   }
+
+   42.856%{
+    background-color: crimson;
+   }
+   42.857%{
+    background-color:darkcyan;
+   }
+
+   57.142%{
+    background-color: darkcyan;
+   }
+   57.143%{
+    background-color:rgb(136, 0, 255);
+   }
+
+   66.665%{
+    background-color: rgb(136, 0, 255);
+   }
+   66.666%{
+    background-color: bisque;
+   }
+
+
+   71.427%{
+    background-color: bisque;
+   }
+   71.428%{
+    background-color: deeppink;
+   }
+
+   85.713%{
+    background-color: hotpink;
+   }
+   85.714%{
+    background-color:blueviolet;
+   }
+
+   99.999%{
+    background-color: blueviolet;
+   }
+   100%{
+    background-color: white;
+   }
+}
+
+
 
 @keyframes x{
     100% {
         transform: translateX( calc(100vw - 20vw) );
-      }
+    }
 }
 
 @keyframes y{
