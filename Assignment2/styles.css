@@ -18,13 +18,13 @@ html, body {
     display: flex;
 }
 
-.wrapper{
+#wrapper{
     position: absolute;
     width: 20%;
     animation: y 3s linear infinite alternate;
 }  
 
-.logo{
+#logo{
     width: 100%;
     animation: x 7s linear infinite alternate, color 21s infinite forwards ; 
     background-color: white;
@@ -109,3 +109,144 @@ html, body {
       }
 }
 
+
+
+#wrapper1{
+    position: absolute;
+    width: 20%;
+    animation: y 4s linear infinite alternate;
+}  
+
+#logo1{
+    width: 100%;
+    animation: x 8s linear infinite alternate, color1 24s infinite forwards ; 
+    background-color: white;
+}
+
+
+@keyframes color1{
+    16.665%{
+     background-color:blueviolet;
+    }
+    16.666%{
+     background-color: hotpink;
+    }
+ 
+    33.332%{
+     background-color: hotpink;
+    }
+    33.333%{
+     background-color: bisque;
+    }
+ 
+    49.999%{
+     background-color: bisque;
+    }
+    50%{
+     background-color:rgb(136, 0, 255);
+    }
+ 
+    66.665%{
+     background-color: rgb(136, 0, 255);
+    }
+    66.666%{
+     background-color: crimson;
+    }
+ 
+    83.332%{
+     background-color: crimson;
+    }
+    83.333%{
+     background-color:chartreuse;
+    }
+ 
+    99.999%{
+     background-color: chartreuse;
+    }
+    100%{
+     background-color: blueviolet;
+    }
+ }
+ 
+
+ 
+#wrapper2{
+    position: absolute;
+    width: 20%;
+    animation: y 5s linear infinite alternate;
+}  
+
+#logo2{
+    width: 100%;
+    animation: x 9s linear infinite alternate, color2 45s infinite forwards ; 
+    background-color: white;
+}
+
+
+@keyframes color2{
+        11.110%{
+        background-color:chartreuse;
+       }
+       11.111%{
+        background-color: crimson;
+       }
+    
+       22.221%{
+        background-color: crimson;
+       }
+       22.222%{
+        background-color: hotpink;
+       }
+    
+       33.332%{
+        background-color: hotpink;
+       }
+       33.333%{
+        background-color:darkcyan;
+       }
+    
+       44.443%{
+        background-color: darkcyan;
+       }
+       44.444%{
+        background-color:gold;
+       }
+    
+       55.554%{
+        background-color: gold;
+       }
+       55.555%{
+        background-color:rgb(136, 0, 255);
+       }
+    
+       66.665%{
+        background-color: rgb(136, 0, 255);
+       }
+       66.666%{
+        background-color: rgb(213, 224, 107);
+       }
+    
+    
+       77.776%{
+        background-color: rgb(213, 224, 107);
+       }
+       77.777%{
+        background-color: violet;
+       }
+    
+       88.887%{
+        background-color: violet;
+       }
+       88.888%{
+        background-color:blueviolet;
+       }
+    
+       99.999%{
+        background-color: blueviolet;
+       }
+       100%{
+        background-color: chartreuse;
+       }
+ }
+ 
+ 
