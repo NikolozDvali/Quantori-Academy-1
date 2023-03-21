@@ -10,10 +10,20 @@
     <audio id="myAudio" src="audio\laser.mp3" autoplay ></audio>
 
     <div class="area">
-        <div class="wrapper">
-            <img src="images\logo.png" class="logo">
+        <div id="wrapper">
+            <img src="images\logo.png" id="logo">
+        </div>
+
+        <div id="wrapper1">
+            <img src="images\logo.png" id="logo1">
+        </div>
+
+        <div id="wrapper2">
+            <img src="images\logo.png" id="logo2">
         </div>
     </div>
+
+    
 
     <script>
         setInterval(function() {
@@ -27,6 +37,30 @@
             audio.currentTime = 0;
             audio.play();
         }, 7000);
+
+        setInterval(function() {
+            var audio = document.getElementById("myAudio");
+            audio.currentTime = 0;
+            audio.play();
+        }, 4000);
+
+        setInterval(function() {
+            var audio = document.getElementById("myAudio");
+            audio.currentTime = 0;
+            audio.play();
+        }, 8000);
+
+        setInterval(function() {
+            var audio = document.getElementById("myAudio");
+            audio.currentTime = 0;
+            audio.play();
+        }, 5000);
+
+        setInterval(function() {
+            var audio = document.getElementById("myAudio");
+            audio.currentTime = 0;
+            audio.play();
+        }, 9000);
     </script>
 </body>
 </html>
