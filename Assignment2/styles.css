@@ -26,11 +26,11 @@ html, body {
 
 .logo{
     width: 100%;
-    animation: x 7s linear infinite alternate, color1 21s infinite forwards ; 
+    animation: x 7s linear infinite alternate, color 21s infinite forwards ; 
     background-color: white;
 }
 
-@keyframes color1{
+@keyframes color{
    14.284%{
     background-color:white;
    }
@@ -95,7 +95,6 @@ html, body {
     background-color: white;
    }
 }
-
 
 
 @keyframes x{
