@@ -18,18 +18,37 @@
         return [state, setValue];
     }
 
+    //returns list title;
+    function ListTitle(){
+        const h1 = document.createElement('h1');
+        h1.innerText = "All Tasks";
+        h1.classList.add("listTitle");
+        return h1;
+    }
+
     /**
      * Functional component for the list
      * @param items {string[]}
      * @returns {HTMLElement} - List element
      */
     function List({items}) {
-        const listItems = items.map((item) => `<li>${item}</li>`).join("");
-        const ul = document.createElement("ul");
-        ul.innerHTML = listItems;
-        return ul;
-    }
+        const div = document.createElement("div");
+        div.classList.add("listsDiv");
+        div.appendChild(ListTitle());
 
+        const listItems = items.map((item, index) => {
+            const radio = `<input type="radio" name="task" onClick="console.log('hello')">`;
+            const p = `<p class="${item.completed ? 'completed' : ''}">${item.name}</p>`;
+            const img = `<img src="images/Delete.svg" class="deleteIcon">`;
+            return `<li class="listItem">${radio}${p}${img}</li>`;
+        }).join("");
+
+        const ul = document.createElement("ul");
+        ul.classList.add("ul");
+        ul.innerHTML = listItems;
+        div.appendChild(ul);
+        return div;
+    }
     /**
      * Button component
      * @param text {string}
@@ -43,22 +62,58 @@
         return button;
     }
 
+    //returns searchBar;
+    function SearchBar(){
+        const form = document.createElement("form");
+        form.classList.add("navBar--form");
+
+        const search = document.createElement('input');
+        search.setAttribute('type', 'text');
+        search.setAttribute('placeHolder', "Search Task");
+        search.classList.add("searchBar");
+
+        form.appendChild(search);
+        return form;
+    }
+
+    //returns navBar;
+    function NavBar(){
+        const div = document.createElement("div");
+        const searchBar = SearchBar();
+        div.appendChild(searchBar);
+        div.classList.add("navBar");
+        return div;
+    }
+
+    //returns header element;
+    function Header(){
+        let header = document.createElement("h1");
+        header.innerText = "To Do List";
+        header.classList.add("header");
+        return header;
+    }
 
     /**
      * App container
      * @returns {HTMLDivElement} - The app container
      */
     function App() {
-        const [items, setItems] = useState(["Item 1", "Item 2", "Item 3"]);
-
+        const [items, setItems] = useState([{name:"Task 1 title", completed: false}, {name:"Task 2 title", completed:false}, {name:"Task 3 title", completed: false}]);
+        
         function addItem() {
-            setItems([...items, `Item ${items.length + 1}`]);
+            setItems([...items, {name: `Task ${items.length + 1} title`, completed: false}]);
         }
-
+        
         const div = document.createElement("div");
+        div.classList.add("container");
+        const header = Header();
+        const navBar = NavBar();
         const list = List({items});
-        const button = Button({text: "Add item", onClick: addItem});
-        div.append(list, button);
+        const button = Button({text: "+ New Task", onClick: addItem});
+        button.classList.add("addNewButton");
+        navBar.appendChild(button);
+
+        div.append(header, navBar, list);
         return div;
     }
 
