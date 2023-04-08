@@ -42,6 +42,7 @@
                 }
                 return item;
               });
+              localStorage.setItem("items", JSON.stringify(updatedItems));
               setItems(updatedItems);            
             }else{
                 const updatedItems = items.map((item, idx) => {
@@ -53,6 +54,7 @@
                   }
                   return item;
                 });
+                localStorage.setItem("items", JSON.stringify(updatedItems));
                 setItems(updatedItems);            
               }
             }
@@ -177,9 +179,6 @@
         search.setAttribute('placeHolder', "Search Task");
         search.classList.add("searchBar");
 
-        if(localStorage.getItem("searchInput") != null && localStorage.getItem("searchInput")!=""){
-            search.value = localStorage.getItem("searchInput");
-        }
 
         search.oninput = (event) =>{
             const str = event.target.value;
@@ -225,7 +224,7 @@
             let text = event.target.value;
             const button = document.getElementsByClassName("addTaskButton--grey")[0];
             if(text.length>0){
-                    button.classList.add("addTaskButton--blue");
+                button.classList.add("addTaskButton--blue");
             }else{
                 button.classList.remove("addTaskButton--blue");
             }
@@ -240,10 +239,11 @@
         //function to add new item into list;
         function addItem(){
             if(document.getElementsByClassName("popupField")[0].value.length>0){
-                setItems([
-                    ...items,
-                    { name: document.getElementsByClassName("popupField")[0].value, completed: false},
-                  ]);
+                const prevItems = localStorage.getItem("items");
+                const newItems = JSON.parse(prevItems);
+                newItems.push({ name: document.getElementsByClassName("popupField")[0].value, completed: false });
+                localStorage.setItem("items", JSON.stringify(newItems));
+                setItems(JSON.parse(localStorage.getItem("items")));
             }
         }
         //function to close popup;
@@ -266,11 +266,8 @@
      * @returns {HTMLDivElement} - The app container
      */
     function App() {
-        const [items, setItems] = useState([
-          { name: "Task 1 title", completed: false},
-          { name: "Task 2 title", completed: false},
-          { name: "Task 3 title", completed: false},
-        ]);
+        const [items, setItems] = useState(JSON.parse(localStorage.getItem("items")));        
+        console.log(items);
 
         function openPopup(){
             document.getElementsByClassName("popupDiv")[0].style.display = "flex";
@@ -287,7 +284,6 @@
         const popup = Popup(items, setItems);
       
         div.append(header, navBar, list, popup);
-        console.log(items);
         return div;
       }
 
@@ -301,6 +297,13 @@
         appContainer.append(App());
     }
 
+    if(localStorage.getItem("items")==null){
+        localStorage.setItem("items", JSON.stringify([
+            { name: "Task 1 title", completed: false},
+            { name: "Task 2 title", completed: false},
+            { name: "Task 3 title", completed: false},
+        ]));
+    }
     // initial render
     renderApp();
 })();
