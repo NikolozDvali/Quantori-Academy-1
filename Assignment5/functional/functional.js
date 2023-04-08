@@ -28,7 +28,7 @@
 
     //returns radio element for uncompleted tasks;
     function RadioElement(items, item, index, setItems){
-        const radioElement = document.createElement("input");
+          const radioElement = document.createElement("input");
           radioElement.type = "checkbox";
           radioElement.checked = item.completed;
           radioElement.onchange = (event) => {
