@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Nunito';
 }
 
 #functional-example{
@@ -73,11 +73,11 @@ li::marker{
     content: "";
 }
 
-.listsDiv{
+.listsDiv--uncompleted, .listsDiv--completed{
     margin-top: 42px;
 }
 
-.listTitle{
+.listTitle-uncompleted, .listTitle-completed{
     font-family: 'Nunito';
     font-style: normal;
     font-weight: 700;
@@ -89,7 +89,7 @@ li::marker{
     margin-bottom: 12px;
 }
 
-.listItem{
+.listItem--uncompleted, .listItem--completed{
     margin-top: 12px;
     width: 50.68%;
     box-sizing: border-box;
@@ -105,7 +105,7 @@ li::marker{
 }
 
 
-input[type="radio"] {
+input[type="checkbox"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -118,7 +118,7 @@ input[type="radio"] {
     margin-left: 12px;
   }
   
-  input[type="radio"]:checked {
+  input[type="checkbox"]:checked {
     background-repeat: no-repeat;
     background-color: #ccc;
     background-image: url(images/checked.svg);
@@ -130,3 +130,86 @@ input[type="radio"] {
     position: absolute;
     right:0;
   }
+
+.taskParagraph--completed{
+    color: #838383;
+}
+
+.popupDiv{
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 524px;
+    height: 371px;
+    left: 50%;
+    top: 158px;
+    transform: translate(-50%, 0);
+    background: #FFFFFF;
+    border: 1px solid #0053CF;
+    border-radius: 24px;
+}
+
+.popupTitle{
+    margin-top: 24px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+}
+
+.popupField{
+    display: flex;
+    margin-top: 38px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: calc(88% - 21px);
+    height: 52px;
+    padding-left: 21px;
+    gap: 10px;
+    background: #F5F5F5;
+    border: 1px solid #D2D2D2;
+    border-radius: 12px;
+}
+
+.addTaskButton--grey{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: calc(43% - 32px);
+    height: 52px;
+    bottom: 22px;
+    right: 27px;
+    border: none;
+    background: #D3D3D3;
+    border-radius: 12px;
+    flex: none;
+    order: 1;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.cancelButton{
+    position: absolute;
+    left: 120.25px;
+    bottom: 38px;
+    border: 0;
+    background-color: #FFFFFF;
+    color: #0053CF;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.addTaskButton--blue{
+    background-color: #3C86F4;
+}
