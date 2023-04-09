@@ -42,7 +42,7 @@
                 }
                 return item;
               });
-              localStorage.setItem("items", JSON.stringify(updatedItems));
+              sessionStorage.setItem("items", JSON.stringify(updatedItems));
               setItems(updatedItems);            
             }else{
                 const updatedItems = items.map((item, idx) => {
@@ -54,7 +54,7 @@
                   }
                   return item;
                 });
-                localStorage.setItem("items", JSON.stringify(updatedItems));
+                sessionStorage.setItem("items", JSON.stringify(updatedItems));
                 setItems(updatedItems);            
               }
             }
@@ -81,8 +81,38 @@
                 }
                 return false;
                 }));  
+            let locItems = JSON.parse(sessionStorage.getItem("items"));
+            locItems.splice(index, 1);
+            console.log(locItems);
+            sessionStorage.setItem("items", JSON.stringify(locItems));
             }
         return img;
+    }
+
+    function MiddleOfListItem(displayCompleted, item){
+        const mid = document.createElement("div");
+                mid.classList.add("listItem__Middle")
+                const pElement = document.createElement('p');
+                pElement.classList.add(`taskParagraph--${displayCompleted ? 'completed' : 'uncompleted'}`);
+                pElement.textContent = item.name;
+
+                const attributes = document.createElement("div");
+                attributes.classList.add("listItem__Attributes");
+
+                const tag = document.createElement("div");
+                tag.classList.add(`listItem__Tag--${item.tag}--${displayCompleted ? 'completed' : 'uncompleted'}`);
+                tag.innerText = item.tag;
+
+                const date = document.createElement("p");
+                date.classList.add("listItem__date");
+                date.innerText = item.date;
+
+                attributes.appendChild(tag);
+                attributes.appendChild(date);
+        
+                mid.appendChild(pElement);
+                mid.appendChild(attributes);
+        return mid;
     }
 
 
@@ -102,10 +132,8 @@
                 const radioElement = RadioElement(items, item, index, setItems);
                 li.appendChild(radioElement);
     
-                const pElement = document.createElement('p');
-                pElement.classList.add(`taskParagraph--${displayCompleted ? 'completed' : 'uncompleted'}`);
-                pElement.textContent = item.name;
-                li.appendChild(pElement);
+                const mid = MiddleOfListItem(displayCompleted, item);
+                li.appendChild(mid);
     
                 if (!displayCompleted) {
                     const img = MyImage(items, index, setItems);
@@ -235,15 +263,15 @@
 
     /*  Returns popup for adding new item into list;
     */
-    function Popup(items, setItems){
+    function Popup(setItems){
         //function to add new item into list;
         function addItem(){
             if(document.getElementsByClassName("popupField")[0].value.length>0){
-                const prevItems = localStorage.getItem("items");
+                const prevItems = sessionStorage.getItem("items");
                 const newItems = JSON.parse(prevItems);
                 newItems.push({ name: document.getElementsByClassName("popupField")[0].value, completed: false });
-                localStorage.setItem("items", JSON.stringify(newItems));
-                setItems(JSON.parse(localStorage.getItem("items")));
+                sessionStorage.setItem("items", JSON.stringify(newItems));
+                setItems(JSON.parse(sessionStorage.getItem("items")));
             }
         }
         //function to close popup;
@@ -266,7 +294,15 @@
      * @returns {HTMLDivElement} - The app container
      */
     function App() {
-        const [items, setItems] = useState(JSON.parse(localStorage.getItem("items")));        
+        if(sessionStorage.getItem("items")==null){
+            sessionStorage.setItem("items", JSON.stringify([
+                { name: "Task 1 Title", completed: false, tag: "Tag", date: "Today"},
+                { name: "Task 2 Title", completed: false, tag: "Work", date: "Tomorrow"},
+                { name: "Task 3 Title", completed: false, tag: "Health", date: "Friday, 23 Mar"},
+            ]));
+        }
+          
+        const [items, setItems] = useState(JSON.parse(sessionStorage.getItem("items")));        
         console.log(items);
 
         function openPopup(){
@@ -281,7 +317,7 @@
         const button = Button({ text: "+ New Task", class:"addNewButton", onClick: openPopup});
         navBar.appendChild(button);
 
-        const popup = Popup(items, setItems);
+        const popup = Popup(setItems);
       
         div.append(header, navBar, list, popup);
         return div;
@@ -297,13 +333,6 @@
         appContainer.append(App());
     }
 
-    if(localStorage.getItem("items")==null){
-        localStorage.setItem("items", JSON.stringify([
-            { name: "Task 1 title", completed: false},
-            { name: "Task 2 title", completed: false},
-            { name: "Task 3 title", completed: false},
-        ]));
-    }
     // initial render
     renderApp();
 })();
