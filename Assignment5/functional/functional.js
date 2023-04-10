@@ -61,7 +61,6 @@
         return radioElement;
     }
 
-
     //Image is reserved word so I called this function 'MyImage' :)
     //returns remove image for uncompleted tasks;
     function MyImage(items, index, setItems){
@@ -89,11 +88,14 @@
         return img;
     }
 
-    function Tag(name, displayCompleted){
+    function Tag(name, displayCompleted, cursorOn){
         const tag = document.createElement("div");
         const className = `listItem__Tag--${name}--${displayCompleted ? 'completed' : 'uncompleted'}`;
         tag.classList.add(className);
         tag.innerText = name;
+        if(cursorOn){
+            tag.classList.add("cursorOnTag");
+        }
         return tag;
     }
 
@@ -120,7 +122,6 @@
                 mid.appendChild(attributes);
         return mid;
     }
-
 
     //returns list itself, 'displayCompleted' is bool that indicates whether it should be list of completed tasks or uncompleted tasks;
     function ListCompletedAndUncompleted(items, setItems, displayCompleted) {
@@ -152,8 +153,6 @@
         div.appendChild(ul);
         return div;
     }
-
-
 
     /**
      * Functional component for the list
@@ -249,29 +248,21 @@
     }
 
     //returns text input for pupup;
-    function PopupField(selectedTag, addButton){
+    function PopupField(){
         const field = document.createElement("input");
         field.classList.add("popupField");
         field.placeholder = "Task Title";
         field.type = "text";
-        field.oninput = (event) => {
-            let text = event.target.value;
-            if(text.length>0 && selectedTag.tag!=null){
-                addButton.classList.add("addTaskButton--blue");
-            }else{
-                addButton.classList.remove("addTaskButton--blue");
-            }
-        }
         return field;
     }
 
     //returns array of objects (tags);
     // {html: tag itself, name: name of the tag}
     function TagInputs(){
-        const healthTag = {html: Tag("health", false), name: "health"};
-        const workTag = {html: Tag("work", false), name: "work"};
-        const homeTag = {html: Tag("home", false), name: "home"};
-        const otherTag = {html: Tag("other", false), name: "other"};
+        const healthTag = {html: Tag("health", false, true), name: "health"};
+        const workTag = {html: Tag("work", false, true), name: "work"};
+        const homeTag = {html: Tag("home", false, true), name: "home"};
+        const otherTag = {html: Tag("other", false, true), name: "other"};
         return [healthTag, workTag, homeTag, otherTag];
     }
 
@@ -284,46 +275,63 @@
 
     //when tag is clicked, it becomes selected tag;
     //other tags lose class --selected;
-    //if in addition field is not empty, addButton becomes clickable;
-    function addEventListenerToTag(selectedTag, addButton, tagInputs, i){
+    function addEventListenerToTag(selectedTag, tagInputs, i){
         tagInputs[i].html.addEventListener("click", ()=>{
             selectedTag.tag = tagInputs[i].name;
             makeAllTagsUnselected(tagInputs);
-            tagInputs[i].html.classList.add(`tagsInput__${selectedTag.tag}--selected`)
-            if(document.getElementsByClassName("popupField")[0].value.length>0){
-                addButton.classList.add("addTaskButton--blue");
-            }else{
-                addButton.classList.remove("addTaskButton--blue");
-            }
+            tagInputs[i].html.classList.add(`tagsInput__${selectedTag.tag}--selected`);
         })
     }
 
     //returns tags input div;
-    function TagsInput(selectedTag, addButton){
+    function TagsInput(selectedTag){
         const div = document.createElement("div");
         div.classList.add("tagsInput");
         const tagInputs = TagInputs();
         for(let i = 0; i<tagInputs.length; i++){
-            addEventListenerToTag(selectedTag, addButton, tagInputs, i);
+            addEventListenerToTag(selectedTag, tagInputs, i);
             div.appendChild(tagInputs[i].html);
         }
         return div;
     }
 
+    //returns date input;
+    function DateInput(){
+        const date = document.createElement("input");
+        date.type = "date";
+        date.classList.add("dateInput");
+        date.onchange = ()=>{
+            console.log(date.value);
+            if(date.value!=''){
+                date.classList.add("dateInput--filled");
+            }else{
+                date.classList.remove("dateInput--filled");
+            }
+        }
+        return date;
+    }
 
     /*  Returns popup for adding new item into list;
     */
     function Popup(setItems){
+        let buttonIsValid = false;
         //keeps track of which tag is selected;
         //is object because needs to be passed as reference;
         let selectedTag = {tag: null};
         //function to add new item into list;
-        //new item is added when field is not empty and one tag is selected;
+        //new item is added when all inputs are placed;
         function addItem(){
-            if(document.getElementsByClassName("popupField")[0].value.length>0 && selectedTag!=null){
+            if(buttonIsValid){
+                function toValidForm(date){
+                    const dt = new Date(date);
+                    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    const output = days[dt.getDay()] + ", " + dt.getDate() + " " + months[dt.getMonth()];
+                    return output;
+                }
                 const prevItems = sessionStorage.getItem("items");
                 const newItems = JSON.parse(prevItems);
-                newItems.push({ name: document.getElementsByClassName("popupField")[0].value, completed: false, tag: selectedTag.tag });
+                newItems.push({ name: document.getElementsByClassName("popupField")[0].value, completed: false, tag: selectedTag.tag, date: toValidForm(dateInput.value)});
                 sessionStorage.setItem("items", JSON.stringify(newItems));
                 setItems(JSON.parse(sessionStorage.getItem("items")));
                 selectedTag.tag = null;
@@ -336,16 +344,33 @@
             document.getElementsByClassName("popupDiv")[0].style.display="none";
             selectedTag.tag=null;
         }
+        const cancelButton = Button({text: "Cancel", onClick: closePopup, class: "cancelButton"});
+        //checks if all inputs are valid and changes button display;
+        //changes buttonIsValid boolean;
+        function validateButton(){
+            if(selectedTag.tag!=null && dateInput.value!='' && field.value.length>0){
+                addButton.classList.add("addTaskButton--blue");
+                buttonIsValid = true;
+            }else{
+                addButton.classList.remove("addTaskButton--blue");
+                buttonIsValid = false;
+            }
+        }
 
         const div = document.createElement("div");
         const popupTitle = PopupTitle("Add New Task");
         const addButton = Button({text: "Add Task", onClick: addItem ,class: "addTaskButton--grey"});
-        const field = PopupField(selectedTag, addButton);
-        const tagsInput = TagsInput(selectedTag, addButton);
+        const field = PopupField(selectedTag);
+        const tagsInput = TagsInput(selectedTag);
+        const dateInput = DateInput();
 
-        const cancelButton = Button({text: "Cancel", onClick: closePopup, class: "cancelButton"});
+        const fields = [field, tagsInput, dateInput];
+        fields.forEach((input) => {
+            input.oninput = validateButton;
+        });
+
         div.classList.add("popupDiv");
-        div.append(popupTitle, field, tagsInput, addButton, cancelButton);
+        div.append(popupTitle, field, tagsInput, dateInput, addButton, cancelButton);
         return div;
     }
 
@@ -361,9 +386,7 @@
                 { name: "Task 3 Title", completed: false, tag: "health", date: "Friday, 23 Mar"},
             ]));
         }
-          
         const [items, setItems] = useState(JSON.parse(sessionStorage.getItem("items")));        
-        console.log(items);
 
         function openPopup(){
             document.getElementsByClassName("popupDiv")[0].style.display = "flex";
