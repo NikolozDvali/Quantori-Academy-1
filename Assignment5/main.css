@@ -230,7 +230,7 @@ input[type="checkbox"] {
     height: 20px;
 }
 
-.listItem__Tag--Tag--uncompleted, .listItem__Tag--Home--uncompleted, .listItem__Tag--Health--uncompleted, .listItem__Tag--Work--uncompleted, .listItem__Tag--Other--uncompleted{
+.listItem__Tag--tag--uncompleted, .listItem__Tag--home--uncompleted, .listItem__Tag--health--uncompleted, .listItem__Tag--work--uncompleted, .listItem__Tag--other--uncompleted{
     display: flex;
     height: 16px;
     flex-direction: column;
@@ -243,9 +243,10 @@ input[type="checkbox"] {
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
+    border: 0;
 }
 
-.listItem__Tag--Tag--completed, .listItem__Tag--Home--completed, .listItem__Tag--Health--completed, .listItem__Tag--Work--completed, .listItem__Tag--Other--completed{
+.listItem__Tag--tag--completed, .listItem__Tag--home--completed, .listItem__Tag--health--completed, .listItem__Tag--work--completed, .listItem__Tag--other--completed{
     display: flex;
     height: 16px;
     flex-direction: column;
@@ -260,24 +261,25 @@ input[type="checkbox"] {
     line-height: 16px;
     background: #F5F5F5;
     color: #838383;
+    border: 0;
 }
 
-.listItem__Tag--Tag--uncompleted, .listItem__Tag--Other--uncompleted{
+.listItem__Tag--tag--uncompleted, .listItem__Tag--other--uncompleted{
     background: #FFECC7;
     color: #EA8C00;
 }
 
-.listItem__Tag--Home--uncompleted{
+.listItem__Tag--home--uncompleted{
     background: #E2F7E2;
     color: #639462;
 }
 
-.listItem__Tag--Health--uncompleted{
+.listItem__Tag--health--uncompleted{
     background: rgba(60, 134, 244, 0.31);
     color: #0053CF;
 }
 
-.listItem__Tag--Work--uncompleted{
+.listItem__Tag--work--uncompleted{
     background: #E8D7FF;
     color:#9747FF;
 }
@@ -291,4 +293,25 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
     color: #838383;
+}
+
+.tagsInput{
+    display: flex;
+    position: absolute;
+    left: 32px;
+    top: 176px;
+    gap: 12px;
+}
+
+.tagsInput__work--selected{
+    border: 1px solid #9747FF;
+}
+.tagsInput__home--selected{
+    border: 1px solid #639462;
+}
+.tagsInput__health--selected{
+    border: 1px solid #0053CF;
+}
+.tagsInput__other--selected{
+    border: 1px solid #EA8C00;
 }

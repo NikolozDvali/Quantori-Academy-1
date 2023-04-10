@@ -89,6 +89,14 @@
         return img;
     }
 
+    function Tag(name, displayCompleted){
+        const tag = document.createElement("div");
+        const className = `listItem__Tag--${name}--${displayCompleted ? 'completed' : 'uncompleted'}`;
+        tag.classList.add(className);
+        tag.innerText = name;
+        return tag;
+    }
+
     function MiddleOfListItem(displayCompleted, item){
         const mid = document.createElement("div");
                 mid.classList.add("listItem__Middle")
@@ -99,9 +107,7 @@
                 const attributes = document.createElement("div");
                 attributes.classList.add("listItem__Attributes");
 
-                const tag = document.createElement("div");
-                tag.classList.add(`listItem__Tag--${item.tag}--${displayCompleted ? 'completed' : 'uncompleted'}`);
-                tag.innerText = item.tag;
+                const tag = Tag(item.tag, displayCompleted);
 
                 const date = document.createElement("p");
                 date.classList.add("listItem__date");
@@ -243,49 +249,103 @@
     }
 
     //returns text input for pupup;
-    function PopupField(){
+    function PopupField(selectedTag, addButton){
         const field = document.createElement("input");
         field.classList.add("popupField");
         field.placeholder = "Task Title";
         field.type = "text";
         field.oninput = (event) => {
             let text = event.target.value;
-            const button = document.getElementsByClassName("addTaskButton--grey")[0];
-            if(text.length>0){
-                button.classList.add("addTaskButton--blue");
+            if(text.length>0 && selectedTag.tag!=null){
+                addButton.classList.add("addTaskButton--blue");
             }else{
-                button.classList.remove("addTaskButton--blue");
+                addButton.classList.remove("addTaskButton--blue");
             }
         }
-
         return field;
     }
+
+    //returns array of objects (tags);
+    // {html: tag itself, name: name of the tag}
+    function TagInputs(){
+        const healthTag = {html: Tag("health", false), name: "health"};
+        const workTag = {html: Tag("work", false), name: "work"};
+        const homeTag = {html: Tag("home", false), name: "home"};
+        const otherTag = {html: Tag("other", false), name: "other"};
+        return [healthTag, workTag, homeTag, otherTag];
+    }
+
+    //removes --selected class from all tags;
+    function makeAllTagsUnselected(tags){
+        for(let i = 0; i<tags.length; i++){
+            tags[i].html.classList.remove(`tagsInput__${tags[i].name}--selected`);
+        }
+    }
+
+    //when tag is clicked, it becomes selected tag;
+    //other tags lose class --selected;
+    //if in addition field is not empty, addButton becomes clickable;
+    function addEventListenerToTag(selectedTag, addButton, tagInputs, i){
+        tagInputs[i].html.addEventListener("click", ()=>{
+            selectedTag.tag = tagInputs[i].name;
+            makeAllTagsUnselected(tagInputs);
+            tagInputs[i].html.classList.add(`tagsInput__${selectedTag.tag}--selected`)
+            if(document.getElementsByClassName("popupField")[0].value.length>0){
+                addButton.classList.add("addTaskButton--blue");
+            }else{
+                addButton.classList.remove("addTaskButton--blue");
+            }
+        })
+    }
+
+    //returns tags input div;
+    function TagsInput(selectedTag, addButton){
+        const div = document.createElement("div");
+        div.classList.add("tagsInput");
+        const tagInputs = TagInputs();
+        for(let i = 0; i<tagInputs.length; i++){
+            addEventListenerToTag(selectedTag, addButton, tagInputs, i);
+            div.appendChild(tagInputs[i].html);
+        }
+        return div;
+    }
+
 
     /*  Returns popup for adding new item into list;
     */
     function Popup(setItems){
+        //keeps track of which tag is selected;
+        //is object because needs to be passed as reference;
+        let selectedTag = {tag: null};
         //function to add new item into list;
+        //new item is added when field is not empty and one tag is selected;
         function addItem(){
-            if(document.getElementsByClassName("popupField")[0].value.length>0){
+            if(document.getElementsByClassName("popupField")[0].value.length>0 && selectedTag!=null){
                 const prevItems = sessionStorage.getItem("items");
                 const newItems = JSON.parse(prevItems);
-                newItems.push({ name: document.getElementsByClassName("popupField")[0].value, completed: false });
+                newItems.push({ name: document.getElementsByClassName("popupField")[0].value, completed: false, tag: selectedTag.tag });
                 sessionStorage.setItem("items", JSON.stringify(newItems));
                 setItems(JSON.parse(sessionStorage.getItem("items")));
+                selectedTag.tag = null;
             }
         }
         //function to close popup;
+        //makes selected tag null;
         function closePopup(){
             document.getElementsByClassName("popupField")[0].value = "";
             document.getElementsByClassName("popupDiv")[0].style.display="none";
+            selectedTag.tag=null;
         }
+
         const div = document.createElement("div");
         const popupTitle = PopupTitle("Add New Task");
-        const field = PopupField();
         const addButton = Button({text: "Add Task", onClick: addItem ,class: "addTaskButton--grey"});
+        const field = PopupField(selectedTag, addButton);
+        const tagsInput = TagsInput(selectedTag, addButton);
+
         const cancelButton = Button({text: "Cancel", onClick: closePopup, class: "cancelButton"});
         div.classList.add("popupDiv");
-        div.append(popupTitle, field, addButton, cancelButton);
+        div.append(popupTitle, field, tagsInput, addButton, cancelButton);
         return div;
     }
 
@@ -296,9 +356,9 @@
     function App() {
         if(sessionStorage.getItem("items")==null){
             sessionStorage.setItem("items", JSON.stringify([
-                { name: "Task 1 Title", completed: false, tag: "Tag", date: "Today"},
-                { name: "Task 2 Title", completed: false, tag: "Work", date: "Tomorrow"},
-                { name: "Task 3 Title", completed: false, tag: "Health", date: "Friday, 23 Mar"},
+                { name: "Task 1 Title", completed: false, tag: "tag", date: "Today"},
+                { name: "Task 2 Title", completed: false, tag: "work", date: "Tomorrow"},
+                { name: "Task 3 Title", completed: false, tag: "health", date: "Friday, 23 Mar"},
             ]));
         }
           
@@ -316,7 +376,6 @@
         const list = List(items, setItems);
         const button = Button({ text: "+ New Task", class:"addNewButton", onClick: openPopup});
         navBar.appendChild(button);
-
         const popup = Popup(setItems);
       
         div.append(header, navBar, list, popup);
