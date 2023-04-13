@@ -30,12 +30,9 @@ export function getWeatherData() {
     const successCallback = (position) => {
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
-      fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`)
-        .then(response => response.json())
-        .then(data => {
-          city = data.localityInfo.administrative[2].name;
-            getDataFromWeatherAPI();
-        });
+      city = lat+","+lng;
+      console.log(city);
+      getDataFromWeatherAPI();
     }
   
     const errorCallback = () => {
