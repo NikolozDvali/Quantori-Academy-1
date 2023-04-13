@@ -383,9 +383,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     right: 76.2%;
     top: 16.92%;
     bottom: 15.38%;
-    width: 17%;
+    width: 57px;
     height: 44px;
-    background-color: #0053CF;
 }
 
 .weather__degrees{

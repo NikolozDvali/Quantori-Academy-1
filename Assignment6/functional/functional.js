@@ -418,6 +418,24 @@
         return div;
       }
 
+
+      function getWeatherData(){
+        function setIcon(data){
+            let iconUrl = data.condition.icon;
+            iconUrl = iconUrl.substring(20, iconUrl.length);
+            document.getElementsByClassName("weather__icon")[0].src = `/Assignment6/images${iconUrl}`
+        }
+
+        const key = "95da8a101a2b4fdb8bb185943231204";
+        const city = "Tbilisi";
+        const url = `http://api.weatherapi.com/v1/current.json?key=${key}&q=${city}&aqi=no`
+        fetch(url).then(response=>response.json()).then(data => {
+            document.getElementsByClassName("weather__degrees")[0].innerHTML=`${data.current.temp_c}&#176`;
+            setIcon(data.current);
+        }
+            ).catch(error=>console.log(error));
+    }
+
     /**
      * Render the app.
      * On change whole app is re-rendered.
@@ -426,8 +444,11 @@
         const appContainer = document.getElementById("functional-example");
         appContainer.innerHTML = "";
         appContainer.append(App());
+        //get weather data;
+        getWeatherData();
     }
 
     // initial render
     renderApp();
+
 })();
