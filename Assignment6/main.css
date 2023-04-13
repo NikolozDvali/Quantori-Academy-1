@@ -403,6 +403,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .weather__location{
+    width: max-content;
     position: absolute;
     left: 74.56%;
     right: 4.44%;
