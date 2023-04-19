@@ -2,24 +2,10 @@
   "tasks": [
     {
       "title": "gdsg",
-      "isCompleted": false,
+      "isCompleted": true,
       "tag": "work",
       "date": "Monday, 13 Dec",
       "id": 6
-    },
-    {
-      "title": "sdgfgd",
-      "isCompleted": true,
-      "tag": "home",
-      "date": "Friday, 31 Dec",
-      "id": 8
-    },
-    {
-      "title": "fasdfasdfs",
-      "isCompleted": true,
-      "tag": "home",
-      "date": "Monday, 4 Mar",
-      "id": 9
     },
     {
       "title": " ROM MEFE VAAAAAAAAAAR",
@@ -37,10 +23,24 @@
     },
     {
       "title": "My bday",
-      "isCompleted": false,
+      "isCompleted": true,
       "tag": "other",
       "date": "Thursday, 21 Sep",
       "id": 13
+    },
+    {
+      "title": "2wretrg",
+      "isCompleted": false,
+      "tag": "other",
+      "date": "Wednesday, 31 Dec",
+      "id": 14
+    },
+    {
+      "title": "fdsg",
+      "isCompleted": true,
+      "tag": "other",
+      "date": "Thursday, 4 Dec",
+      "id": 15
     }
   ]
 }

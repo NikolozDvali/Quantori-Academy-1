@@ -31,7 +31,6 @@ export function getWeatherData() {
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
       city = lat+","+lng;
-      console.log(city);
       getDataFromWeatherAPI();
     }
   

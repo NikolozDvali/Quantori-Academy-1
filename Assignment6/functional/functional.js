@@ -35,26 +35,28 @@ import { List } from "./list.js";
         return button;
     }
 
+    function makeSomeVisible(items, str){
+        items.map((item, index) => {
+            let uncompletedItem = document.getElementById(`listItem--uncompleted--${index}`);
+            let completedItem = document.getElementById(`listItem--isCompleted--${index}`);
+            if(item.name.toLowerCase().includes(str.toLowerCase())){
+                if(item.isCompleted==false){
+                    uncompletedItem.style.display = "flex";
+                }else{
+                    completedItem.style.display = "flex";
+                }
+            }else{
+                if(item.isCompleted==false){
+                    uncompletedItem.style.display = "none";
+                }else{
+                    completedItem.style.display = "none";
+                }
+            }
+        });
+    }
+
     //returns searchBar;
     function SearchBar(items, setItems){
-        function makeSomeVisible(str){
-            items.map((item, index) => {
-                if(item.title.substring(0,str.length)===str){
-                    if(item.isCompleted==false){
-                        document.getElementById(`listItem--uncompleted--${index}`).style.display = "flex";
-                    }else{
-                        document.getElementById(`listItem--isCompleted--${index}`).style.display = "flex";
-                    }
-                }else{
-                    if(item.isCompleted==false){
-                        document.getElementById(`listItem--uncompleted--${index}`).style.display = "none";
-                    }else{
-                        document.getElementById(`listItem--isCompleted--${index}`).style.display = "none";
-                    }
-                }
-            });
-        }
-
         const form = document.createElement("form");
         form.classList.add("navBar--form");
 
@@ -66,7 +68,7 @@ import { List } from "./list.js";
 
         search.oninput = (event) =>{
             const str = event.target.value;
-            makeSomeVisible(str);
+            makeSomeVisible(items, str);
         }
 
         form.appendChild(search);

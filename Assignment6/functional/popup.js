@@ -61,9 +61,16 @@ function makeAllTagsUnselected(tags){
 //other tags lose class --selected;
 function addEventListenerToTag(selectedTag, tagInputs, i){
         tagInputs[i].html.addEventListener("click", ()=>{
-            selectedTag.tag = tagInputs[i].title;
-            makeAllTagsUnselected(tagInputs);
-            tagInputs[i].html.classList.add(`tagsInput__${selectedTag.tag}--selected`);
+            console.log(selectedTag.tag)
+            console.log(tagInputs[i].title)
+            if(tagInputs[i].title==selectedTag.tag){
+                selectedTag.tag = null;
+                makeAllTagsUnselected(tagInputs);
+            }else{
+                selectedTag.tag = tagInputs[i].title;
+                makeAllTagsUnselected(tagInputs);
+                tagInputs[i].html.classList.add(`tagsInput__${selectedTag.tag}--selected`);
+            }
         })
 }
 
@@ -72,12 +79,14 @@ function addEventListenerToTag(selectedTag, tagInputs, i){
     const div = document.createElement("div");
     div.classList.add("tagsInput");
     const tagInputs = TagInputs();
-    for(let i = 0; i<tagInputs.length; i++){
-        addEventListenerToTag(selectedTag, tagInputs, i);
-        div.appendChild(tagInputs[i].html);
-    }
+    
+    tagInputs.forEach((tagInput, i) => {
+      addEventListenerToTag(selectedTag, tagInputs, i);
+      div.appendChild(tagInput.html);
+    });
+    
     return div;
-}
+  }
 
 //returns date input;
 function DateInput(){
@@ -151,10 +160,11 @@ export function Popup(){
     const tagsInput = TagsInput(selectedTag);
     const dateInput = DateInput();
 
-    const fields = [field, tagsInput, dateInput];
+    const fields = [field, dateInput];
     fields.forEach((input) => {
         input.oninput = validateButton;
     });
+    tagsInput.onclick = validateButton;
 
     div.classList.add("popupDiv");
     div.append(popupTitle, field, tagsInput, dateInput, addButton, cancelButton);
