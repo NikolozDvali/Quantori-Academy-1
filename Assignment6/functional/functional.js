@@ -14,12 +14,16 @@ import { List } from "./list.js";
         state = state || initialValue;
 
         function setValue(newValue) {
-            state = newValue;
+            state = {
+                ...state,
+                ...newValue,
+            };
             renderApp();
         }
 
         return [state, setValue];
     }
+
 
     /**
      * Button component
@@ -35,11 +39,11 @@ import { List } from "./list.js";
         return button;
     }
 
-    function makeSomeVisible(items, str){
-        items.map((item, index) => {
+    function makeSomeVisible(state, str){
+        state.tasks.map((item, index) => {
             let uncompletedItem = document.getElementById(`listItem--uncompleted--${index}`);
             let completedItem = document.getElementById(`listItem--isCompleted--${index}`);
-            if(item.name.toLowerCase().includes(str.toLowerCase())){
+            if(item.title.toLowerCase().includes(str.toLowerCase())){
                 if(item.isCompleted==false){
                     uncompletedItem.style.display = "flex";
                 }else{
@@ -56,7 +60,7 @@ import { List } from "./list.js";
     }
 
     //returns searchBar;
-    function SearchBar(items, setItems){
+    function SearchBar(state, setState){
         const form = document.createElement("form");
         form.classList.add("navBar--form");
 
@@ -68,7 +72,7 @@ import { List } from "./list.js";
 
         search.oninput = (event) =>{
             const str = event.target.value;
-            makeSomeVisible(items, str);
+            makeSomeVisible(state, str);
         }
 
         form.appendChild(search);
@@ -76,9 +80,9 @@ import { List } from "./list.js";
     }
 
     //returns navBar;
-    function NavBar(items, setItems){
+    function NavBar(state, setState){
         const div = document.createElement("div");
-        const searchBar = SearchBar(items, setItems);
+        const searchBar = SearchBar(state, setState);
         div.appendChild(searchBar);
         div.classList.add("navBar");
         return div;
@@ -117,13 +121,16 @@ import { List } from "./list.js";
      */
     function App() {
         //on the first enter on the page, gets data from the server;
-        const [items, setItems] = useState([]);
-
-        if (items.length === 0) {
+        const [state, setState] = useState({
+            searchText: '',
+            tasks: [],
+          });
+          
+        if (state.tasks.length === 0) {
             fetch('http://localhost:3004/tasks')
                 .then(response => response.json())
                 .then(data => {
-                setItems(data);
+                setState({tasks: data});
                 })
                 .catch(error => console.error(error));
         }
@@ -135,11 +142,11 @@ import { List } from "./list.js";
         const div = document.createElement("div");
         div.classList.add("container");
         const header = Header();
-        const navBar = NavBar(items, setItems);
-        const list = List(items, setItems);
+        const navBar = NavBar(state, setState);
+        const list = List(state, setState);
         const button = Button({ text: "+ New Task", class:"addNewButton", onClick: openPopup});
         navBar.appendChild(button);
-        const popup = Popup(items, setItems);
+        const popup = Popup(state, setState);
       
         div.append(header, navBar, list, popup);
         return div;
