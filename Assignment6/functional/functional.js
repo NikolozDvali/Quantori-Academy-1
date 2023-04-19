@@ -18,6 +18,9 @@ import { List } from "./list.js";
                 ...state,
                 ...newValue,
             };
+            if(newValue.hasOwnProperty("searchText")){
+                localStorage.setItem("searchText", newValue.searchText);
+            }
             renderApp();
         }
 
@@ -69,8 +72,8 @@ import { List } from "./list.js";
         search.setAttribute('placeHolder', "Search Task");
         search.classList.add("searchBar");
 
-        if(localStorage.getItem("searchText")){
-            search.value = localStorage.getItem("searchText");
+        if(state.searchText!=null){
+            search.value = state.searchText;
             setTimeout(()=>search.focus(), 0);
             setTimeout(()=>makeSomeVisible(state, search.value),0);
         }
@@ -78,7 +81,7 @@ import { List } from "./list.js";
         search.oninput = (event) =>{
             const str = event.target.value
             makeSomeVisible(state, str);
-            localStorage.setItem("searchText", str);
+            setState({searchText: str});
         }
 
         form.appendChild(search);
@@ -139,6 +142,9 @@ import { List } from "./list.js";
                 setState({tasks: data});
                 })
                 .catch(error => console.error(error));
+        }
+        if(localStorage.getItem("searchText")){
+            state.searchText = localStorage.getItem("searchText");
         }
 
         function openPopup(){
