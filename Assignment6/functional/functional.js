@@ -69,10 +69,16 @@ import { List } from "./list.js";
         search.setAttribute('placeHolder', "Search Task");
         search.classList.add("searchBar");
 
+        if(localStorage.getItem("searchText")){
+            search.value = localStorage.getItem("searchText");
+            setTimeout(()=>search.focus(), 0);
+            setTimeout(()=>makeSomeVisible(state, search.value),0);
+        }
 
         search.oninput = (event) =>{
-            const str = event.target.value;
+            const str = event.target.value
             makeSomeVisible(state, str);
+            localStorage.setItem("searchText", str);
         }
 
         form.appendChild(search);
@@ -142,8 +148,8 @@ import { List } from "./list.js";
         const div = document.createElement("div");
         div.classList.add("container");
         const header = Header();
-        const navBar = NavBar(state, setState);
         const list = List(state, setState);
+        const navBar = NavBar(state, setState);
         const button = Button({ text: "+ New Task", class:"addNewButton", onClick: openPopup});
         navBar.appendChild(button);
         const popup = Popup(state, setState);

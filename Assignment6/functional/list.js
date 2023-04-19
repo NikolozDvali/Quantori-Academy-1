@@ -17,9 +17,9 @@ function RadioElement(items, item, index) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedTask)
-            })
+             },
+             body: JSON.stringify(updatedTask)
+             })
             .catch(error => console.error(error));
     };
     
