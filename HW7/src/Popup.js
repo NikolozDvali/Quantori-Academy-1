@@ -1,3 +1,5 @@
+import "./styles/Popup.css"
+
 /**
      * Button component
      * @param text {string}

@@ -1,63 +1,40 @@
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
-    entry: path.resolve(__dirname, 'src/index.js'),
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
-        assetModuleFilename: '[name][ext]',
-    },
-    devServer: {
-        static: {
-            directory: path.resolve(__dirname, 'dist'),
-        },
-        port: 3000,
-        open: true,
-        hot: true,
-        compress: true,
-        historyApiFallback: true
-    },
+    entry: {
+        main: path.resolve(__dirname, './src/app.js'),
+      },
+      output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'deploy')
+      },
     module: {
         rules: [
-            {
-                test:/\.css$/,
-                use: [
-                    'style-loader', 'css-loader'
-                ]
-            }, 
-            {
-                test: /\.(png|jpg|gif)$/i,
-                use: [
-                  {
-                    loader: 'url-loader',
-                    options: {
-                      limit: 8192,
-                    }
-                  },
-                  {
-                    test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                    type: 'asset/resource'
-                  }
-                ],
-               type: 'asset/resource'
-              },
-            //   {
-            //     test: /\.(png|jpe?g|gif)$/i,
-            //     use: [
-            //       {
-            //         loader: 'file-loader',
-            //       },
-            //     ],
-            //   }
-        ],
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env']
+              }
+            }
+          },
+          { 
+            test: /\.css$/, 
+            use: ["style-loader", "css-loader"] 
+          },
+          { 
+            test: /\.(?:ico|gif|png|jpg|jpeg|svg|db)$/i,
+            type: 'asset/resource',
+          },
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Webpack App',
-            filename: 'index.html',
-            template: 'src/template.html'
-        })
-    ]
-}
+          title: "Webpack Output",
+          template: 'src/index.html'
+        }),
+    ],
+};

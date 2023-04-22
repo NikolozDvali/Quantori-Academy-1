@@ -1,3 +1,6 @@
+import "./styles/List.css"
+import image from "./images/Delete.svg"
+import bcImage from "./images/checked.svg"
 
 //returns list title;
 function ListTitle(title){
@@ -27,6 +30,7 @@ function RadioElement(items, item, index) {
     const radioElement = document.createElement("input");
     radioElement.type = "checkbox";
     radioElement.checked = isCompleted;
+    radioElement.style.backgroundImage =`url(${bcImage})`;
     radioElement.onchange = (event) => {
       const isCompleted = event.target.checked;
       updateItems(isCompleted);
@@ -37,7 +41,8 @@ function RadioElement(items, item, index) {
 
 //Image is reserved word so I called this function 'MyImage' :)
 //returns remove image for uncompleted tasks;
-function MyImage(item) {
+function MyImage(item, setItems) {
+
     const {classList } = {
       classList: ['deleteIcon'],
     };
@@ -49,7 +54,7 @@ function MyImage(item) {
     };
   
     const img = document.createElement('img');
-    img.src = './assets/images/Delete.png';
+    img.src = image;
     img.classList.add(...classList);
     img.onclick = deleteItem;
     
@@ -111,7 +116,7 @@ function ListCompletedAndUncompleted(items, setItems, displayCompleted) {
             li.appendChild(mid);
 
             if (!displayCompleted) {
-                const img = MyImage(item);
+                const img = MyImage(item, setItems);
                 li.appendChild(img);
             }
 
