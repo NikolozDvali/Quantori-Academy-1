@@ -1,11 +1,5 @@
 import "./styles/Weather.css";
-
-interface Position {
-  coords: {
-    latitude: number;
-    longitude: number;
-  };
-}
+import { Position } from "./Interfaces";
 
 
 export function getWeatherData(): void {

@@ -16,7 +16,7 @@
     },
     {
       "title": "gfgds",
-      "isCompleted": true,
+      "isCompleted": false,
       "tag": "home",
       "date": "Thursday, 14 Mar",
       "id": 29
@@ -32,8 +32,15 @@
       "title": "salami",
       "tag": "work",
       "date": "Thursday, 5 Mar",
-      "isCompleted": false,
+      "isCompleted": true,
       "id": 31
+    },
+    {
+      "title": "bolo testi",
+      "tag": "health",
+      "date": "Friday, 11 Nov",
+      "isCompleted": false,
+      "id": 32
     }
   ]
 }

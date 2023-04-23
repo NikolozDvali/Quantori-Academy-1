@@ -1,16 +1,6 @@
 import "./styles/List.css"
-interface Item{
-  title: string,
-  isCompleted: boolean,
-  tag: string,
-  date: string,
-  id: number,
-}
-
-interface State{
-  tasks: Item[],
-  searchText: string,
-}
+import { Item } from "./Interfaces";
+import { State } from "./Interfaces";
 
 //returns list title;
 function ListTitle(title:string){

@@ -2,20 +2,10 @@ import "./styles/main.css"
 import { List } from "./List";
 import { Popup } from "./Popup";
 import { getWeatherData, WeatherContainer } from "./Weather";
+import { Item } from "./Interfaces";
+import { State } from "./Interfaces";
 
 (function () {
-    interface Item{
-        title: string,
-        isCompleted: boolean,
-        tag: string,
-        date: string,
-        id: number,
-    }
-
-    interface State{
-        tasks: Item[],
-        searchText: string,
-    }
 
     let state: State = {
         searchText: '',

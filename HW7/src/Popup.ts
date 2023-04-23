@@ -1,11 +1,6 @@
 import "./styles/Popup.css"
-
-interface Tag {
-    tag: string | null;
-  }
-  
-  
-
+import { Tag } from "./Interfaces";
+import { tagItem } from "./Interfaces";
 
 /**
      * Button component
@@ -47,10 +42,6 @@ function PopupField(){
     field.placeholder = "Task Title";
     field.type = "text";
     return field;
-}
-interface tagItem{
-    html: HTMLElement,
-    title: string,
 }
 
 //returns array of objects (tags);
