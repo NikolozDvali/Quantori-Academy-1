@@ -3,11 +3,14 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        main: path.resolve(__dirname, './src/app.js'),
+        main: path.resolve(__dirname, './src/app.ts'),
       },
       output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'deploy')
+      },
+      resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
       },
     module: {
         rules: [
@@ -20,6 +23,11 @@ module.exports = {
                 presets: ['@babel/preset-env']
               }
             }
+          },
+          {
+            test: /\.tsx?$/,
+            use: 'ts-loader',
+            exclude: /node_modules/,
           },
           { 
             test: /\.css$/, 

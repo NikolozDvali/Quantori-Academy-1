@@ -2,14 +2,14 @@
   "tasks": [
     {
       "title": "grgwheh",
-      "isCompleted": false,
+      "isCompleted": true,
       "tag": "health",
       "date": "Sunday, 2 May",
       "id": 25
     },
     {
       "title": "dsgg",
-      "isCompleted": true,
+      "isCompleted": false,
       "tag": "work",
       "date": "Saturday, 4 Dec",
       "id": 26
@@ -27,6 +27,13 @@
       "tag": "other",
       "date": "Friday, 4 Dec",
       "id": 28
+    },
+    {
+      "title": "gfgds",
+      "isCompleted": true,
+      "tag": "home",
+      "date": "Thursday, 14 Mar",
+      "id": 29
     }
   ]
 }
