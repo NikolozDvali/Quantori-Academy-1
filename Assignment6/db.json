@@ -1,46 +1,11 @@
 {
   "tasks": [
     {
-      "title": "gdsg",
-      "isCompleted": true,
-      "tag": "work",
-      "date": "Monday, 13 Dec",
-      "id": 6
-    },
-    {
-      "title": " ROM MEFE VAAAAAAAAAAR",
-      "isCompleted": true,
+      "title": "grgwheh",
+      "isCompleted": false,
       "tag": "health",
-      "date": "Tuesday, 31 Dec",
-      "id": 10
-    },
-    {
-      "title": "gdfsg",
-      "isCompleted": false,
-      "tag": "home",
-      "date": "Thursday, 5 Apr",
-      "id": 12
-    },
-    {
-      "title": "My bday",
-      "isCompleted": true,
-      "tag": "other",
-      "date": "Thursday, 21 Sep",
-      "id": 13
-    },
-    {
-      "title": "2wretrg",
-      "isCompleted": false,
-      "tag": "other",
-      "date": "Wednesday, 31 Dec",
-      "id": 14
-    },
-    {
-      "title": "fdsg",
-      "isCompleted": true,
-      "tag": "other",
-      "date": "Thursday, 4 Dec",
-      "id": 15
+      "date": "Sunday, 2 May",
+      "id": 25
     }
   ]
 }

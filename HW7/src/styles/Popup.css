@@ -1,0 +1,157 @@
+
+.popupDiv{
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 524px;
+    height: 371px;
+    left: 50%;
+    top: 158px;
+    transform: translate(-50%, 0);
+    background: #FFFFFF;
+    border: 1px solid #0053CF;
+    border-radius: 24px;
+}
+
+.popupTitle{
+    margin-top: 24px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+}
+
+.popupField{
+    display: flex;
+    margin-top: 38px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: calc(88% - 21px);
+    height: 52px;
+    padding-left: 21px;
+    gap: 10px;
+    background: #F5F5F5;
+    border: 1px solid #D2D2D2;
+    border-radius: 12px;
+}
+
+.addTaskButton--grey{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: calc(43% - 32px);
+    height: 52px;
+    bottom: 22px;
+    right: 27px;
+    border: none;
+    background: #D3D3D3;
+    border-radius: 12px;
+    flex: none;
+    order: 1;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.cancelButton{
+    cursor: pointer;
+    position: absolute;
+    left: 120.25px;
+    bottom: 38px;
+    border: 0;
+    background-color: #FFFFFF;
+    color: #0053CF;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.addTaskButton--blue{
+    cursor: pointer;
+    background-color: #3C86F4;
+}
+
+.listItem__Tag--tag--isCompleted, .listItem__Tag--home--isCompleted, .listItem__Tag--health--isCompleted, .listItem__Tag--work--isCompleted, .listItem__Tag--other--isCompleted{
+    display: flex;
+    height: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    background: #F5F5F5;
+    color: #838383;
+    border: 0;
+}
+
+
+.tagsInput{
+    display: flex;
+    position: absolute;
+    left: 32px;
+    top: 176px;
+    gap: 12px;
+}
+
+.tagsInput__work--selected{
+    border: 1px solid #9747FF;
+}
+.tagsInput__home--selected{
+    border: 1px solid #639462;
+}
+.tagsInput__health--selected{
+    border: 1px solid #0053CF;
+}
+.tagsInput__other--selected{
+    border: 1px solid #EA8C00;
+}
+
+.dateInput{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px;
+    gap: 10px;
+    position: absolute;
+    width: 107px;
+    height: 40px;
+    right: 5.5%;
+    top: 165px;
+    background: #FFFFFF;
+    border: 2px solid grey;
+    border-radius: 12px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #1D1D1D;
+}
+.dateInput--filled{
+    border: 2px solid rgba(60, 134, 244, 0.6);
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.cursorOnTag{
+    cursor: pointer;
+}
