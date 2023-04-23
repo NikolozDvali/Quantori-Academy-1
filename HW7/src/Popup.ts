@@ -74,8 +74,6 @@ function makeAllTagsUnselected(tags: tagItem[]){
 //other tags lose class --selected;
 function addEventListenerToTag(selectedTag: Tag, tagInputs: tagItem[], i: number){
         tagInputs[i].html.addEventListener("click", ()=>{
-            console.log(selectedTag.tag)
-            console.log(tagInputs[i].title)
             if(tagInputs[i].title==selectedTag.tag){
                 selectedTag.tag = null;
                 makeAllTagsUnselected(tagInputs);
@@ -123,7 +121,7 @@ export function Popup(){
     let buttonIsValid = false;
     //keeps track of which tag is selected;
     //is object because needs to be passed as reference;
-  let selectedTag: Tag = {tag: null};
+    let selectedTag: Tag = {tag: null};
     //function to add new item into list;
     //new item is added when all inputs are placed;
     function addItem(){
@@ -135,15 +133,15 @@ export function Popup(){
             return output;
         }
         if(buttonIsValid){
-            let data = {title: "", tag: "", date: ""};
-            const popupField = document.getElementsByClassName("popupField")[0] as HTMLInputElement;
-            const title = popupField.value;
-            data.title = title;
-            const tag =  selectedTag.tag; 
-            data.tag =tag;
-            const dateInput = document.getElementById("dateInput") as HTMLInputElement;
-            const date = toValidForm(dateInput.value);
-            data.date = date;
+             let data = {title: "", tag: "", date: "", isCompleted: false};
+             const popupField = document.getElementsByClassName("popupField")[0] as HTMLInputElement;
+             const title = popupField.value;
+             data.title = title;
+             const tag =  selectedTag.tag; 
+             data.tag =tag;
+             const dateInput = document.getElementsByClassName("dateInput")[0] as HTMLInputElement;
+             const date = toValidForm(dateInput.value);
+             data.date = date;
 
             fetch('http://localhost:3004/tasks', {
                 method: 'POST',
@@ -153,7 +151,7 @@ export function Popup(){
                 body: JSON.stringify(data)
                 })
                 .catch(error => console.error(error));
-            selectedTag.tag = null;
+                selectedTag.tag = null;
         }
     }
     //function to close popup;

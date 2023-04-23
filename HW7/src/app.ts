@@ -63,15 +63,15 @@ import { getWeatherData, WeatherContainer } from "./Weather";
             let uncompletedItem = document.getElementById(`listItem--uncompleted--${index}`);
             let completedItem = document.getElementById(`listItem--isCompleted--${index}`);
             if(item.title.toLowerCase().includes(str.toLowerCase())){
-                if(item.isCompleted==false){
+                if(item.isCompleted==false && uncompletedItem!=null){
                     uncompletedItem.style.display = "flex";
-                }else{
+                }else if(completedItem!=null){
                     completedItem.style.display = "flex";
                 }
             }else{
-                if(item.isCompleted==false){
+                if(item.isCompleted==false && uncompletedItem!=null){
                     uncompletedItem.style.display = "none";
-                }else{
+                }else if(completedItem!=null){
                     completedItem.style.display = "none";
                 }
             }
@@ -130,7 +130,7 @@ import { getWeatherData, WeatherContainer } from "./Weather";
      * App container
      * @returns {HTMLDivElement} - The app container
      */
-    function App() {
+    function App(): HTMLDivElement {
         //on the first enter on the page, gets data from the server;
         const [innerState, setInnerState] = useState({
             searchText: '',
@@ -147,6 +147,7 @@ import { getWeatherData, WeatherContainer } from "./Weather";
             })
                 .catch(error => console.error(error));
         }
+
         if(localStorage.getItem("searchText")){
             state.searchText = localStorage.getItem("searchText");
         }

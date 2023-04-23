@@ -8,13 +8,6 @@
       "id": 25
     },
     {
-      "title": "dsgg",
-      "isCompleted": false,
-      "tag": "work",
-      "date": "Saturday, 4 Dec",
-      "id": 26
-    },
-    {
       "title": "gamarjoba",
       "isCompleted": false,
       "tag": "home",
@@ -22,18 +15,25 @@
       "id": 27
     },
     {
-      "title": "me var zvio",
-      "isCompleted": false,
-      "tag": "other",
-      "date": "Friday, 4 Dec",
-      "id": 28
-    },
-    {
       "title": "gfgds",
       "isCompleted": true,
       "tag": "home",
       "date": "Thursday, 14 Mar",
       "id": 29
+    },
+    {
+      "title": "me var nika",
+      "tag": "other",
+      "date": "Thursday, 4 Dec",
+      "isCompleted": false,
+      "id": 30
+    },
+    {
+      "title": "salami",
+      "tag": "work",
+      "date": "Thursday, 5 Mar",
+      "isCompleted": false,
+      "id": 31
     }
   ]
 }

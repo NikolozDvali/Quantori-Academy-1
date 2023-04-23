@@ -1,6 +1,4 @@
 import "./styles/List.css"
-// import image from "./images/Delete.svg"
-// import bcImage from "./images/checked.svg"
 interface Item{
   title: string,
   isCompleted: boolean,
@@ -42,7 +40,8 @@ function RadioElement(items: State, item: Item, index: number) {
     const radioElement = document.createElement("input");
     radioElement.type = "checkbox";
     radioElement.checked = isCompleted;
-    // radioElement.style.backgroundImage =`url(${bcImage})`;
+    const bcImage = require("./images/checked.svg") as string;
+    radioElement.style.backgroundImage =`url(${bcImage})`;
     radioElement.onchange = (event: Event) => {
       const isCompleted: boolean = (event.target as HTMLInputElement).checked;
       updateItems(isCompleted);
@@ -67,7 +66,8 @@ function MyImage(item: Item, setItems: (state: State)=>void) {
     };
   
     const img = document.createElement('img');
-    // img.src = image;
+    const image = require("./images/Delete.svg") as string;
+    img.src = image;
     img.classList.add(...classList);
     img.onclick = deleteItem;
     
@@ -130,7 +130,6 @@ function ListCompletedAndUncompleted(items:State, setItems: (state: State)=>void
                 const img = MyImage(item, setItems);
                 li.appendChild(img);
             }
-
             ul.appendChild(li);
         }
     });
@@ -143,9 +142,8 @@ function ListCompletedAndUncompleted(items:State, setItems: (state: State)=>void
  * @param items {string[]}
  * @returns {HTMLElement} - List element
  */
-export function List(items: State, setItems: (state: State)=>void) {
+export function List(items: State, setItems: (state: State)=>void): HTMLDivElement {
     const div = document.createElement("div");
-    
     const uncompletedList = ListCompletedAndUncompleted(items, setItems, false);
     const completedList = ListCompletedAndUncompleted(items, setItems, true);
     
