@@ -65,7 +65,7 @@ export default function Popup({items, setItems}: {items: ListItemInterface[], se
                 tag: selectedTag,
                 date: validDate(dateInput.value),
                 isCompleted: false,
-                key: 0,
+                key: Math.random()*1000,
                 id: maxId+1,
             };
             setItems([...items, task]);

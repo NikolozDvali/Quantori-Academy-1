@@ -11,6 +11,7 @@ function App() {
   const [items, setItems] = useState<ListItemInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  //fetches initial data when page is loaded;
   useEffect(() => {
     fetch('http://localhost:3004/tasks')
       .then(response => response.json())
@@ -20,13 +21,15 @@ function App() {
       });
   }, []);
 
+  //so that unnecessary calculations are avoided; 
   const memoizedItems = useMemo(() => {
-    return items.map((item) => ({
-      ...item,
-      key: Math.floor(Math.random() * 100000)
-    }));
+    return items.map((item) => {
+        return {
+          ...item,
+        }
+    });
   }, [items]);
-
+  
   return (
     <div className="functional-example">
       <div className="container">

@@ -26,7 +26,7 @@ export default function ListItem({ data, display, setItems, listItems}: { data: 
     method: 'DELETE'
   })
   };
-
+  
   return display === data.isCompleted ? (
     <li className={`listItem--${data.isCompleted ? "isCompleted" : "uncompleted"}`} id={`${data.id}`}>
       <input type="checkbox" checked={data.isCompleted} onChange={()=>handleCheck(data.id)} style={{ backgroundImage: `url(${chbimage})` }} />
