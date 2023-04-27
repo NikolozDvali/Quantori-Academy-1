@@ -11,8 +11,8 @@ export default function Weather() {
             // Function to set the weather icon
             function setWeatherIcon(data: any): void {
                 let iconUrl = data.condition.icon;
-                iconUrl = iconUrl.substring(20, iconUrl.length);
-                import(`../../images${iconUrl}`).then((image) => {
+                iconUrl = iconUrl.substring(34, iconUrl.length);
+                import(`./assets${iconUrl}`).then((image) => {
                   (document.getElementsByClassName(
                     "weather__icon"
                   )[0] as HTMLImageElement).src = image.default;

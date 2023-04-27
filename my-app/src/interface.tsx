@@ -20,12 +20,14 @@ export interface ListItemInterface{
     title: string;
     tag:string;
     date: string;
+    key: number;
 }
 
 export interface ListProps{
     displayCompleted: boolean;
     listItems: ListItemInterface[];
     foo: Dispatch<SetStateAction<ListItemInterface[]>>;
+    searchText: string;
 }
 
 export interface Position {

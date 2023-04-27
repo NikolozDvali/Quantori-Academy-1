@@ -1,8 +1,8 @@
 import { ListItemInterface } from "../../interface";
 import './list.css'
-import image from "../../images/Delete.svg"
-import chbimage from '../../images/checked.svg'
-import { Dispatch, SetStateAction } from "react";
+import image from "./assets/Delete.svg"
+import chbimage from './assets/checked.svg'
+import { Dispatch, SetStateAction} from "react";
 
 
 export default function ListItem({ data, display, setItems, listItems}: { data: ListItemInterface, display: boolean, setItems: Dispatch<SetStateAction<ListItemInterface[]>>,  listItems: ListItemInterface[] }) {
@@ -10,11 +10,22 @@ export default function ListItem({ data, display, setItems, listItems}: { data: 
     setItems(listItems.map((item: ListItemInterface)=>(
       item.id!==id ? item : {...item, isCompleted: !item.isCompleted} 
     )))
+
+    fetch(`http://localhost:3004/tasks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({...data, isCompleted: !data.isCompleted })
+      })
   };
+
   const handleClick = (id: number) => {
-    setItems(listItems.filter((item: ListItemInterface)=> item.id !== id))
+    setItems(listItems.filter((item: ListItemInterface)=> item.id !== id));
+    fetch(`http://localhost:3004/tasks/${id}`, {
+    method: 'DELETE'
+  })
   };
-  
 
   return display === data.isCompleted ? (
     <li className={`listItem--${data.isCompleted ? "isCompleted" : "uncompleted"}`} id={`${data.id}`}>
