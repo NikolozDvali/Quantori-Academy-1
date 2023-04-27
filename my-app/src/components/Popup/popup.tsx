@@ -2,6 +2,7 @@ import { Dispatch, FormEvent, SetStateAction } from 'react';
 import Button from '../Button/button';
 import './popup.css'
 import { ListItemInterface } from '../../interface';
+import Tag from './Tag/tag';
 
 export default function Popup({items, setItems}: {items: ListItemInterface[], setItems: Dispatch<SetStateAction<ListItemInterface[]>>}){
     let selectedTag: string = "";
@@ -118,17 +119,14 @@ export default function Popup({items, setItems}: {items: ListItemInterface[], se
         else{input.classList.remove("dateInput--filled");}
         checkValidation();
     }
+
+    const tagNames = ["health", "work", "home", "other"];
     
     return (
         <div className="popupDiv">
             <p className="popupTitle">Add new Task</p>
             <input className="popupField" placeholder="Task Title" type="text" onInput={checkValidation}></input>
-            <div className="tagsInput">
-                <div className="listItem__Tag--health--uncompleted cursorOnTag" onClick={(event)=>handleTagChange("health", event)}>health</div>
-                <div className="listItem__Tag--work--uncompleted cursorOnTag" onClick={(event)=>handleTagChange("work", event)}>work</div>
-                <div className="listItem__Tag--home--uncompleted cursorOnTag" onClick={(event)=>handleTagChange("home", event)}>home</div>
-                <div className="listItem__Tag--other--uncompleted cursorOnTag" onClick={(event)=>handleTagChange("other", event)}>other</div>
-            </div>
+            <Tag names={tagNames} handleTagChange={handleTagChange}></Tag>
             <input type="date" className="dateInput" onInput={(event)=>handleDateChange(event)}></input>
             <Button text="Cancel" name="cancelButton" foo={handleClosePopup}></Button>
             <Button text="Add Task" name="addTaskButton--grey addTaskButton" foo={handleAddTask}></Button>
