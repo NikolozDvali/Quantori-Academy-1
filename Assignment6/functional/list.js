@@ -11,15 +11,15 @@ function RadioElement(items, item, index) {
     const { isCompleted } = item;
     
     const updateItems = (isCompleted) => {
-      items[index].isCompleted = isCompleted;
-      const updatedTask = items[index];
+      items.tasks[index].isCompleted = isCompleted;
+      const updatedTask = items.tasks[index];
         fetch(`http://localhost:3004/tasks/${item.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedTask)
-            })
+             },
+             body: JSON.stringify(updatedTask)
+             })
             .catch(error => console.error(error));
     };
     
@@ -99,7 +99,7 @@ function ListCompletedAndUncompleted(items, setItems, displayCompleted) {
     div.appendChild(ListTitle(displayCompleted ? 'isCompleted Tasks' : 'All tasks'));
     const ul = document.createElement('ul');
     ul.classList.add('ul');
-    items.forEach((item, index) => {
+    items.tasks.forEach((item, index) => {
         if (item.isCompleted === displayCompleted) {
             const li = document.createElement('li');
             li.classList.add(`listItem--${displayCompleted ? 'isCompleted' : 'uncompleted'}`);
