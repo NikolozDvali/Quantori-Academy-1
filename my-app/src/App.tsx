@@ -16,9 +16,13 @@ function App() {
     fetch('http://localhost:3004/tasks')
       .then(response => response.json())
       .then(data => {
-        setIsLoading(false);
         setItems(data);
-      });
+      })
+      .catch(error =>
+        console.error(error));
+      return () => {
+        setIsLoading(false);
+      }
   }, []);
 
   //so that unnecessary calculations are avoided; 
@@ -29,16 +33,20 @@ function App() {
         }
     });
   }, [items]);
+
+  const memorizedText = useMemo(() => {
+    return searchText;
+  }, [searchText]);
   
   return (
     <div className="functional-example">
       <div className="container">
         <Header></Header>
-        <Navbar items={items} searchText={searchText} setSearchText={setSearchText}></Navbar>
+        <Navbar items={memoizedItems} searchText={memorizedText} setSearchText={setSearchText}></Navbar>
         {isLoading ? (
           <div>Loading...</div>
         ) : (
-          <List items={memoizedItems} setItems={setItems} searchText={searchText}></List>
+          <List items={memoizedItems} setItems={setItems} searchText={memorizedText}></List>
         )}
         <Popup items={memoizedItems} setItems={setItems}></Popup>
       </div>

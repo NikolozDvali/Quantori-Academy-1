@@ -4,6 +4,7 @@ export interface ButtonProps{
     foo: ()=>void;
     name: string;
     text: string;
+    myRef?: any;
 }
 
 export interface ListItem{

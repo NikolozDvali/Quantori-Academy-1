@@ -1,4 +1,4 @@
-import { Dispatch, FormEvent, SetStateAction } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useRef } from 'react';
 import Button from '../Button/button';
 import './popup.css'
 import { ListItemInterface } from '../../interface';
@@ -6,6 +6,7 @@ import Tag from './Tag/tag';
 
 export default function Popup({items, setItems}: {items: ListItemInterface[], setItems: Dispatch<SetStateAction<ListItemInterface[]>>}){
     let selectedTag: string = "";
+    const butRef = useRef<any>();
     const handleClosePopup = () => {
         const popupDiv = document.querySelector('.popupDiv') as HTMLElement;
         if (popupDiv) {
@@ -14,14 +15,14 @@ export default function Popup({items, setItems}: {items: ListItemInterface[], se
     };
 
     const checkValidation = () => {
-        const but = document.getElementsByClassName("addTaskButton")[0] as HTMLElement;
         function makeButtonValid(){
-            if(but.classList.contains("addTaskButton--grey")) but.classList.remove("addTaskButton--grey");
-            but.classList.add("addTaskButton--blue");
+            if(butRef.current.classList.contains("addTaskButton--grey")) butRef.current.classList.remove("addTaskButton--grey");
+            butRef.current.classList.add("addTaskButton--blue");
         }
         function makeButtonInvalid(){
-            but.classList.add("addTaskButton--grey");
-            if(but.classList.contains("addTaskButton--blue"))but.classList.remove("addTaskButton--blue");
+            console.log(butRef);
+            butRef.current.classList.add("addTaskButton--grey");
+            if(butRef.current.classList.contains("addTaskButton--blue"))butRef.current.classList.remove("addTaskButton--blue");
         }
         const titleInput = document.getElementsByClassName("popupField")[0] as HTMLInputElement;
         if(titleInput.value.length===0) {
@@ -129,7 +130,7 @@ export default function Popup({items, setItems}: {items: ListItemInterface[], se
             <Tag names={tagNames} handleTagChange={handleTagChange}></Tag>
             <input type="date" className="dateInput" onInput={(event)=>handleDateChange(event)}></input>
             <Button text="Cancel" name="cancelButton" foo={handleClosePopup}></Button>
-            <Button text="Add Task" name="addTaskButton--grey addTaskButton" foo={handleAddTask}></Button>
+            <Button text="Add Task" name="addTaskButton--grey addTaskButton" foo={handleAddTask} myRef={butRef}></Button>
         </div>
     );
 }
