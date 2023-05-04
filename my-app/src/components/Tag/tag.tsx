@@ -8,7 +8,7 @@ export default function Tag({ names, handleTagChange, className }: {
     return (
       <div className={className}>
         {names.map((name) => (
-          <div className={`listItem__Tag--${name}--uncompleted cursorOnTag`} key={Math.random() * 1000} onClick={(event) => handleTagChange(name, event)}>{name}</div>
+          <div className={`listItem__Tag--${name}--uncompleted cursorOnTag tagInPopup--${name}`} key={Math.random() * 1000} onClick={(event) => handleTagChange(name, event)}>{name}</div>
         ))}
       </div>
     );

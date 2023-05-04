@@ -27,12 +27,22 @@ export const tasksSlice = createSlice({
     //removes task
     removeTask: (state, action) => {
       state.tasks = state.tasks.filter((item) => item.id !== action.payload);
+    },
+
+    modifyTask: (state, action) => {
+      const updatedTask = action.payload;
+      const taskIndex = state.tasks.findIndex((task) => task.id === updatedTask.id);
+      updatedTask.key = state.tasks[taskIndex].key;
+      if (taskIndex !== -1) {
+        state.tasks[taskIndex] = updatedTask;
+      }
     }
-  
+    
+
   }
 });
 
 // Action creators are generated for each case reducer function
-export const {addTask, setTasksFromServer, changeCompleted, removeTask } = tasksSlice.actions;
+export const {addTask, setTasksFromServer, changeCompleted, removeTask, modifyTask } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

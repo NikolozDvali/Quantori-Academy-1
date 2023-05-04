@@ -150,3 +150,11 @@ input[type="checkbox"] {
     align-items: center;
     color: #838383;
 }
+
+.editIcon{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #0053CF;
+    right: 25px;
+}

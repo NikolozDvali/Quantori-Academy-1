@@ -1,4 +1,4 @@
-import { ListItemInterface } from '../../interface';
+import { ListItemInterface, currentTask } from '../../interface';
 import './list.css'
 import { useSelector} from 'react-redux';
 import ListItem from './listItem';
@@ -7,9 +7,12 @@ interface ListItselfProps {
   displayCompleted: boolean;
   searchText: string;
   show?: string;
+  showPopup: boolean;
+  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentTask: React.Dispatch<React.SetStateAction<currentTask>>;
 }
 
-export default function ListItself({displayCompleted, searchText, show}: ListItselfProps) {
+export default function ListItself({displayCompleted, searchText, show, showPopup, setShowPopup, setCurrentTask} : ListItselfProps) {
   const items = useSelector((state: any) => state.tasks.tasks);
 
   const filteredItems = show ? items.filter((item: ListItemInterface) => item.tag === show) : items;
@@ -30,6 +33,9 @@ export default function ListItself({displayCompleted, searchText, show}: ListIts
             data={item}
             display={displayCompleted}
             searchText={searchText}
+            showPopup={showPopup}
+            setShowPopup={setShowPopup}
+            setCurrentTask={setCurrentTask}
           />
         ))}
       </ul>

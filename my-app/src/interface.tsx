@@ -42,3 +42,11 @@ export interface PopupPropsInterface{
     newTaskState: ListItemInterface;
     setNewTaskState: React.Dispatch<React.SetStateAction<ListItemInterface>>;
 }
+
+export interface currentTask {
+    id: number;
+    title: string;
+    tag: string;
+    date: string;
+    isCompleted: boolean;
+}

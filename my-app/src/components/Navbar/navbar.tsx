@@ -3,13 +3,12 @@ import Button from '../Button/button'
 import { Dispatch, FormEvent, SetStateAction, useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 
-export default function Navbar({setSearchText, value}: {setSearchText: Dispatch<SetStateAction<string>>, value: string}){
+export default function Navbar({setSearchText, value, showPopup, setShowPopup}: {setSearchText: Dispatch<SetStateAction<string>>, value: string, showPopup: boolean, setShowPopup: React.Dispatch<React.SetStateAction<boolean>>}){
 
     let navigate = useNavigate();
 
     function openPopup(){
-        const popupDiv = document.getElementsByClassName("popupDiv")[0] as HTMLElement;
-        popupDiv.style.display = "flex";
+        setShowPopup(!showPopup);
     }
 
     const makeSomeVisible = (event: FormEvent<HTMLInputElement>) => {
