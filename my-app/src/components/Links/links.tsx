@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 import './links.css'
 
 export function Links({names}:{names: string[]}){

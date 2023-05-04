@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route, Link, useSearchParams, useParams } from "react-router-dom";
+import { Routes, Route, useSearchParams} from "react-router-dom";
 import Header from './components/Header/header';
 import Navbar from './components/Navbar/navbar';
 import List from './components/List/list';
@@ -37,7 +37,7 @@ function App() {
   
   const tagNames = ["all", "health", "work", "home", "other"];
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const searchT = searchParams.get("search");
 
   return (

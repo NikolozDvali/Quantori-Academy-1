@@ -1,8 +1,7 @@
 import './navbar.css'
 import Button from '../Button/button'
-import { ListItemInterface } from '../../interface';
 import { Dispatch, FormEvent, SetStateAction, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 export default function Navbar({setSearchText, value}: {setSearchText: Dispatch<SetStateAction<string>>, value: string}){
 
@@ -20,16 +19,17 @@ export default function Navbar({setSearchText, value}: {setSearchText: Dispatch<
         navigate(`/?search=${encodeURIComponent(str)}`);
     };
     
-    const makeSomeVisibleForString = (str: string) => {
-        setSearchText(str);
-        navigate(`/?search=${encodeURIComponent(str)}`);
-    };
-
-    //on first render (or refresh looks for value in tasks);
     useEffect(() => {
+        const makeSomeVisibleForString = (str: string) => {
+            setSearchText(str);
+            navigate(`/?search=${encodeURIComponent(str)}`);
+        };
+    
         if (value !== '') {
             makeSomeVisibleForString(value)
-    }}, [value]);
+        }
+    }, [value, setSearchText, navigate]);
+    
     
 
     return (
