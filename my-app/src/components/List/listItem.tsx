@@ -2,14 +2,15 @@ import { ListItemInterface } from "../../interface";
 import './list.css'
 import image from "./assets/Delete.svg"
 import chbimage from './assets/checked.svg'
-import { Dispatch, SetStateAction} from "react";
+import { useDispatch } from "react-redux";
+import { changeCompleted, removeTask } from "../../redux/tasksSlice";
 
 
-export default function ListItem({ data, display, setItems, listItems}: { data: ListItemInterface, display: boolean, setItems: Dispatch<SetStateAction<ListItemInterface[]>>,  listItems: ListItemInterface[] }) {
+export default function ListItem({ data, display, searchText}: { data: ListItemInterface, display: boolean, searchText: string}) {
+  const dispatch = useDispatch()
+
   const handleCheck = (id: number) => {
-    setItems(listItems.map((item: ListItemInterface)=>(
-      item.id!==id ? item : {...item, isCompleted: !item.isCompleted} 
-    )))
+    dispatch(changeCompleted(id));
 
     fetch(`http://localhost:3004/tasks/${id}`, {
       method: 'PUT',
@@ -21,13 +22,13 @@ export default function ListItem({ data, display, setItems, listItems}: { data: 
   };
 
   const handleClick = (id: number) => {
-    setItems(listItems.filter((item: ListItemInterface)=> item.id !== id));
+    dispatch(removeTask(id));
     fetch(`http://localhost:3004/tasks/${id}`, {
     method: 'DELETE'
   })
   };
   
-  return display === data.isCompleted ? (
+  return (display === data.isCompleted && (searchText === "" || data.title.includes(searchText))) ? (
     <li className={`listItem--${data.isCompleted ? "isCompleted" : "uncompleted"}`} id={`${data.id}`}>
       <input type="checkbox" checked={data.isCompleted} onChange={()=>handleCheck(data.id)} style={{ backgroundImage: `url(${chbimage})` }} />
       <div className="listItem__Middle">

@@ -1,9 +1,8 @@
 import './navbar.css'
 import Button from '../Button/button'
-import { ListItemInterface } from '../../interface';
 import { Dispatch, FormEvent, SetStateAction } from 'react';
 
-export default function Navbar({items, searchText, setSearchText}:{items: ListItemInterface[], searchText: string, setSearchText: Dispatch<SetStateAction<string>>}){
+export default function Navbar({setSearchText}: {setSearchText: Dispatch<SetStateAction<string>>}){
     function openPopup(){
         const popupDiv = document.getElementsByClassName("popupDiv")[0] as HTMLElement;
         popupDiv.style.display = "flex";

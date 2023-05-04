@@ -4,11 +4,15 @@ import Header from './components/Header/header';
 import Navbar from './components/Navbar/navbar';
 import List from './components/List/list';
 import Popup from './components/Popup/popup';
-import { ListItemInterface } from './interface';
+
+import { useDispatch} from "react-redux";
+import { setTasksFromServer } from "./redux/tasksSlice";
 
 function App() {
+
+  const dispatch = useDispatch();
+
   const [searchText, setSearchText] = useState("");
-  const [items, setItems] = useState<ListItemInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   //fetches initial data when page is loaded;
@@ -16,23 +20,14 @@ function App() {
     fetch('http://localhost:3004/tasks')
       .then(response => response.json())
       .then(data => {
-        setItems(data);
+        dispatch(setTasksFromServer(data));
       })
       .catch(error =>
         console.error(error));
       return () => {
         setIsLoading(false);
       }
-  }, []);
-
-  //so that unnecessary calculations are avoided; 
-  const memoizedItems = useMemo(() => {
-    return items.map((item) => {
-        return {
-          ...item,
-        }
-    });
-  }, [items]);
+  }, [dispatch]);
 
   const memorizedText = useMemo(() => {
     return searchText;
@@ -42,13 +37,13 @@ function App() {
     <div className="functional-example">
       <div className="container">
         <Header></Header>
-        <Navbar items={memoizedItems} searchText={memorizedText} setSearchText={setSearchText}></Navbar>
+        <Navbar setSearchText={setSearchText}></Navbar>
         {isLoading ? (
           <div>Loading...</div>
         ) : (
-          <List items={memoizedItems} setItems={setItems} searchText={memorizedText}></List>
-        )}
-        <Popup items={memoizedItems} setItems={setItems}></Popup>
+          <List searchText={memorizedText}></List>
+         )} 
+        <Popup></Popup>
       </div>
     </div>
   );

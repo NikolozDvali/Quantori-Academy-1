@@ -1,10 +1,14 @@
-import { Dispatch, FormEvent, SetStateAction, useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import Button from '../Button/button';
 import './popup.css'
-import { ListItemInterface } from '../../interface';
 import Tag from './Tag/tag';
+import {useDispatch, useSelector} from 'react-redux';
+import {addTask} from '../../redux/tasksSlice'
 
-export default function Popup({items, setItems}: {items: ListItemInterface[], setItems: Dispatch<SetStateAction<ListItemInterface[]>>}){
+export default function Popup(){
+    const items = useSelector((state:any)=>state.tasks.tasks);
+    const dispatch = useDispatch();
+
     let selectedTag: string = "";
     const butRef = useRef<any>();
     const handleClosePopup = () => {
@@ -20,7 +24,6 @@ export default function Popup({items, setItems}: {items: ListItemInterface[], se
             butRef.current.classList.add("addTaskButton--blue");
         }
         function makeButtonInvalid(){
-            console.log(butRef);
             butRef.current.classList.add("addTaskButton--grey");
             if(butRef.current.classList.contains("addTaskButton--blue"))butRef.current.classList.remove("addTaskButton--blue");
         }
@@ -57,7 +60,7 @@ export default function Popup({items, setItems}: {items: ListItemInterface[], se
             }
             //returns current max id;
             const maxId = items.reduce(
-                (max, item) => (item.id > max ? item.id : max),
+                (max: number, item: any) => (item.id > max ? item.id : max),
                 0
             );
             //initializes task to be added;
@@ -69,7 +72,6 @@ export default function Popup({items, setItems}: {items: ListItemInterface[], se
                 key: Math.random()*1000,
                 id: maxId+1,
             };
-            setItems([...items, task]);
 
             fetch('http://localhost:3004/tasks', {
                 method: 'POST',
@@ -90,6 +92,7 @@ export default function Popup({items, setItems}: {items: ListItemInterface[], se
                 but.classList.remove("addTaskButton--blue");
                 but.classList.add("addTaskButton--grey");
             }
+            dispatch(addTask(task));
             makePopupUnused();
             handleClosePopup();
         }
