@@ -1,0 +1,30 @@
+.tagButtons{
+    display: flex;
+    position: relative;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.tagButton__all{
+    color: brown;
+}
+
+.tagButton__health{
+    color: #0053CF;
+}
+
+.tagButton__work{
+    color: #9747FF;
+}
+
+.tagButton__home{
+    color: #639462;
+}
+
+.tagButton__other{
+    color: #EA8C00;
+}

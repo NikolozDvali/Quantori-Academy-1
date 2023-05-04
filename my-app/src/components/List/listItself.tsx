@@ -3,8 +3,16 @@ import './list.css'
 import { useSelector} from 'react-redux';
 import ListItem from './listItem';
 
-export default function ListItself({displayCompleted, searchText}: {displayCompleted: boolean, searchText: string}) {
+interface ListItselfProps {
+  displayCompleted: boolean;
+  searchText: string;
+  show?: string;
+}
+
+export default function ListItself({displayCompleted, searchText, show}: ListItselfProps) {
   const items = useSelector((state: any) => state.tasks.tasks);
+
+  const filteredItems = show ? items.filter((item: ListItemInterface) => item.tag === show) : items;
 
   return (
     <div
@@ -16,7 +24,7 @@ export default function ListItself({displayCompleted, searchText}: {displayCompl
         {displayCompleted ? "Completed Tasks" : "All tasks"}
       </h1>
       <ul className="ul">
-        {items.map((item: ListItemInterface) => (
+        {filteredItems.map((item: ListItemInterface) => (
           <ListItem
             key={item.key}
             data={item}

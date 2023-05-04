@@ -1,7 +1,7 @@
 import { FormEvent, useRef } from 'react';
 import Button from '../Button/button';
 import './popup.css'
-import Tag from './Tag/tag';
+import Tag from '../Tag/tag';
 import {useDispatch, useSelector} from 'react-redux';
 import {addTask} from '../../redux/tasksSlice'
 
@@ -125,12 +125,12 @@ export default function Popup(){
     }
 
     const tagNames = ["health", "work", "home", "other"];
-    
+
     return (
         <div className="popupDiv">
             <p className="popupTitle">Add new Task</p>
             <input className="popupField" placeholder="Task Title" type="text" onInput={checkValidation}></input>
-            <Tag names={tagNames} handleTagChange={handleTagChange}></Tag>
+            <Tag names={tagNames} handleTagChange={handleTagChange} className='tagsInput'></Tag>
             <input type="date" className="dateInput" onInput={(event)=>handleDateChange(event)}></input>
             <Button text="Cancel" name="cancelButton" foo={handleClosePopup}></Button>
             <Button text="Add Task" name="addTaskButton--grey addTaskButton" foo={handleAddTask} myRef={butRef}></Button>

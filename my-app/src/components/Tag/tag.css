@@ -18,3 +18,10 @@
 .tagsInput__other--selected{
     border: 1px solid #EA8C00;
 }
+
+.tagsInputRouter{
+    display: flex;
+    position: relative;
+    top: 28px;
+    gap: 20px;
+}

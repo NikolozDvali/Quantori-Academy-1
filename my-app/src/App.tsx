@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route, Link, useSearchParams, useParams } from "react-router-dom";
 import Header from './components/Header/header';
 import Navbar from './components/Navbar/navbar';
 import List from './components/List/list';
 import Popup from './components/Popup/popup';
-
 import { useDispatch} from "react-redux";
 import { setTasksFromServer } from "./redux/tasksSlice";
+import { Links } from './components/Links/links';
+
 
 function App() {
 
@@ -33,19 +35,31 @@ function App() {
     return searchText;
   }, [searchText]);
   
+  const tagNames = ["all", "health", "work", "home", "other"];
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchT = searchParams.get("search");
+
   return (
     <div className="functional-example">
-      <div className="container">
-        <Header></Header>
-        <Navbar setSearchText={setSearchText}></Navbar>
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <List searchText={memorizedText}></List>
-         )} 
-        <Popup></Popup>
+        <div className="container">
+          <Header></Header>
+          <Navbar setSearchText={setSearchText} value={searchT || ""}></Navbar>
+          <Links names={tagNames}></Links>
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <Routes>
+              <Route path='/' element={<List searchText={memorizedText}></List>}></Route>
+              <Route path='/home' element={<List searchText={memorizedText} show={"home"}></List>}></Route>
+              <Route path='/other' element={<List searchText={memorizedText} show={"other"}></List>}></Route>
+              <Route path='/health' element={<List searchText={memorizedText} show={"health"}></List>}></Route>
+              <Route path='/work' element={<List searchText={memorizedText} show={"work"}></List>}></Route>
+            </Routes>
+          )} 
+          <Popup></Popup>
+        </div>
       </div>
-    </div>
   );
 }
 
