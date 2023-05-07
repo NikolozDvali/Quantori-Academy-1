@@ -17,20 +17,28 @@
       "key": 428.82594022381016
     },
     {
-      "title": "AXA",
-      "tag": "home",
-      "date": "Saturday, 4 Dec",
+      "title": "AXA ARA ISA KIDE",
+      "tag": "health",
+      "date": "Friday, 3 Nov",
       "id": 59,
-      "isCompleted": true,
+      "isCompleted": false,
       "key": 537.7628509088516
     },
     {
       "title": "GES",
       "tag": "other",
       "date": "Tuesday, 13 Apr",
-      "isCompleted": false,
+      "isCompleted": true,
       "id": 60,
       "key": 262.7213590199382
+    },
+    {
+      "title": "me var barni",
+      "tag": "home",
+      "date": "Friday, 31 Dec",
+      "isCompleted": true,
+      "key": 220.40523814443947,
+      "id": 61
     }
   ]
 }

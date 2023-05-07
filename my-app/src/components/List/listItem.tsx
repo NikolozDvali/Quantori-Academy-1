@@ -1,6 +1,7 @@
 import { ListItemInterface, currentTask } from "../../interface";
 import './list.css'
 import image from "./assets/Delete.svg"
+import editIcon from "./assets/edit.svg"
 import chbimage from './assets/checked.svg'
 import { useDispatch, useSelector } from "react-redux";
 import { changeCompleted, removeTask } from "../../redux/tasksSlice";
@@ -57,7 +58,7 @@ export default function ListItem({ data, display, searchText, showPopup, setShow
           <p className="listItem__date">{data.date}</p>
         </div>
       </div>
-      {!data.isCompleted && <div className="editIcon" onClick={()=>handleEditTask(data.id)}></div>}
+      {!data.isCompleted && <img className="editIcon" onClick={()=>handleEditTask(data.id)} alt="edit icon" src={editIcon}></img>}
       {!data.isCompleted && <img alt="remove" className="deleteIcon" src={image} onClick={()=>{handleClick(data.id)}}/>}
     </li>
   ) : null;
