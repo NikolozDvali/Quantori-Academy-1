@@ -1,0 +1,27 @@
+.tagsInput{
+    display: flex;
+    position: absolute;
+    left: 32px;
+    top: 176px;
+    gap: 12px;
+}
+
+.tagsInput__work--selected{
+    border: 1px solid #9747FF;
+}
+.tagsInput__home--selected{
+    border: 1px solid #639462;
+}
+.tagsInput__health--selected{
+    border: 1px solid #0053CF;
+}
+.tagsInput__other--selected{
+    border: 1px solid #EA8C00;
+}
+
+.tagsInputRouter{
+    display: flex;
+    position: relative;
+    top: 28px;
+    gap: 20px;
+}
